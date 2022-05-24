@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import {
   faGoogle,
-  faApple,
+  faTwitter,
   faFacebookF,
 } from "@fortawesome/free-brands-svg-icons";
 
@@ -63,10 +63,10 @@ const Login = ({ authService }) => {
             icon={faFacebookF}
           />
         </button>
-        <button onClick={onLogin} data-snstype="Apple">
+        <button onClick={onLogin} data-snstype="Twitter">
           <FontAwesomeIcon
-            className={`${styles.sns_icon} ${styles.apple}`}
-            icon={faApple}
+            className={`${styles.sns_icon} ${styles.twitter}`}
+            icon={faTwitter}
           />
         </button>
         <button onClick={onLogin} data-snstype="Google">
