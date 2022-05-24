@@ -20,6 +20,20 @@ class AuthService {
     return firebase.auth().createUserWithEmailAndPassword(email, password);
   }
 
+  resetEmail(email) {
+    console.log(`이 이메일로 ${email}`);
+    return firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(function () {
+        // Password reset email sent.
+        console.log("email 전송");
+      })
+      .catch(function (error) {
+        // Error occurred. Inspect error.code.
+      });
+  }
+
   onAuthChange(onUserChanged) {
     firebase.auth().onAuthStateChanged((user) => {
       onUserChanged(user);

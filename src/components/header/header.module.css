@@ -1,5 +1,5 @@
 @value font-mLarge from '../../common/size.css';
-@value color-black from '../../common/colors.css';
+@value color-darkBlack from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -20,7 +20,7 @@
   .icon {
     width: 15px;
     height: 15px;
-    color: color-black;
+    color: color-darkBlack;
   }
 
   .title {

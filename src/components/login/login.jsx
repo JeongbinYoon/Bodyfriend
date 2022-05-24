@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./login.module.css";
@@ -9,10 +9,16 @@ import {
   faTwitter,
   faFacebookF,
 } from "@fortawesome/free-brands-svg-icons";
+import Alert_findUser from "./alert/alert_findUser";
 
 const Login = ({ authService }) => {
   const emailInput = useRef();
   const pwInput = useRef();
+  const [isCancelBtnClicked, setCancelBtnClicked] = useState(false);
+
+  const handleCancelBtnClick = () => {
+    setCancelBtnClicked(false);
+  };
 
   const navigate = useNavigate();
   const goToHome = (userId) => {
@@ -26,7 +32,11 @@ const Login = ({ authService }) => {
   const onEmailLogin = (event) => {
     event.preventDefault();
     authService //
-      .emailLogin(emailInput.current.value, pwInput.current.value);
+      .emailLogin(emailInput.current.value, pwInput.current.value)
+      .then((data) => {
+        console.log(data);
+        goToHome(data.user.uid);
+      });
   };
 
   // SNS 로그인
@@ -61,16 +71,14 @@ const Login = ({ authService }) => {
           로그인
         </button>
       </form>
-
       <div className={styles.sub}>
         <a href="#">
-          <span>아이디 / 비밀번호 찾기</span>
+          <span onClick={() => setCancelBtnClicked(true)}>계정찾기</span>
         </a>
         <Link to="/createUser">
           <span>회원가입</span>
         </Link>
       </div>
-
       <div className={styles.sns}>
         <button onClick={onLogin} data-snstype="Facebook">
           <FontAwesomeIcon
@@ -91,12 +99,17 @@ const Login = ({ authService }) => {
           />
         </button>
       </div>
-
       <img
         className={styles.logo}
         src="./images/login/bf_logo.png"
         alt="logo"
       />
+      {isCancelBtnClicked && (
+        <Alert_findUser
+          onCancelBtnClick={handleCancelBtnClick}
+          authService={authService}
+        />
+      )}
     </div>
   );
 };

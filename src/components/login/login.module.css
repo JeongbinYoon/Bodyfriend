@@ -1,5 +1,5 @@
 @value font-mExtraLarge, font-mMedium, font-btn, radius-small from '../../common/size.css';
-@value line-grey, color-gold, color-white, color-grey, color-black from '../../common/colors.css';
+@value line-grey, color-gold, color-white, color-grey, color-darkBlack from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -42,7 +42,7 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    color: color-black;
+    color: color-darkBlack;
   }
 
   .login input {
@@ -92,7 +92,7 @@
   }
 
   .sns button .sns_icon {
-    color: color-black;
+    color: color-darkBlack;
   }
 
   .sns_icon.facebook {
