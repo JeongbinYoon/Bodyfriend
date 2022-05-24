@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +11,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Login = ({ authService }) => {
+  const emailInput = useRef();
+  const pwInput = useRef();
+
   const navigate = useNavigate();
   const goToHome = (userId) => {
     navigate({
@@ -18,6 +21,15 @@ const Login = ({ authService }) => {
       state: { id: userId },
     });
   };
+
+  // 이메일 로그인
+  const onEmailLogin = (event) => {
+    event.preventDefault();
+    authService //
+      .emailLogin(emailInput.current.value, pwInput.current.value);
+  };
+
+  // SNS 로그인
   const onLogin = (event) => {
     authService //
       .login(event.currentTarget.dataset.snstype)
@@ -32,28 +44,31 @@ const Login = ({ authService }) => {
       user && goToHome(user.uid);
     });
   });
+
   return (
     <div className={styles.login}>
       <Header title={"로그인"} />
       <form>
         <div className={styles.login_id}>
-          <input type="email" placeholder="아이디" />
+          <input ref={emailInput} type="email" placeholder="아이디" />
           <FontAwesomeIcon className={styles.id_icon} icon={faEnvelope} />
         </div>
         <div className={styles.login_pw}>
-          <input type="password" placeholder="비밀번호" />
+          <input ref={pwInput} type="password" placeholder="비밀번호" />
           <FontAwesomeIcon className={styles.pw_icon} icon={faLock} />
         </div>
-        <button className={styles.loginBtn}>로그인</button>
+        <button onClick={onEmailLogin} className={styles.loginBtn}>
+          로그인
+        </button>
       </form>
 
       <div className={styles.sub}>
         <a href="#">
           <span>아이디 / 비밀번호 찾기</span>
         </a>
-        <a href="#">
+        <Link to="/createUser">
           <span>회원가입</span>
-        </a>
+        </Link>
       </div>
 
       <div className={styles.sns}>
