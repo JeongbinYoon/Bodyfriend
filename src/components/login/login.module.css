@@ -1,0 +1,116 @@
+@value font-mExtraLarge, font-mMedium, font-btn, radius-small from '../../common/size.css';
+@value line-grey, color-gold, color-white, color-grey, color-black from '../../common/colors.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .login {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .login a {
+    text-decoration: none;
+    color: color-grey;
+  }
+
+  .login form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  .login_id,
+  .login_pw {
+    position: relative;
+  }
+
+  .login_pw {
+    margin-top: 10px;
+  }
+
+  .login_id .id_icon,
+  .login_pw .pw_icon {
+    height: font-mExtraLarge;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: color-black;
+  }
+
+  .login input {
+    width: 100%;
+    height: 40px;
+    padding-left: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid line-grey;
+    font-size: font-mExtraLarge;
+  }
+
+  .login .loginBtn {
+    height: 45px;
+    margin-top: 40px;
+    padding: 0;
+    color: color-white;
+    font-size: font-btn;
+    border: none;
+    border-radius: radius-small;
+    background-color: color-gold;
+  }
+
+  .sub {
+    display: flex;
+    margin: 15px 0 20px 0;
+    margin-left: auto;
+    font-size: font-mMedium;
+  }
+
+  .sub a:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  .sns {
+    margin: 0 auto;
+  }
+
+  .sns button {
+    width: 54px;
+    height: 54px;
+    margin: 0 8px;
+    padding: 0;
+    background-color: color-white;
+    border: 1px solid line-grey;
+    border-radius: 50%;
+  }
+
+  .sns button .sns_icon {
+    color: color-black;
+  }
+
+  .sns_icon.facebook {
+    font-size: 18px;
+  }
+
+  .sns_icon.apple {
+    font-size: 20px;
+  }
+
+  .sns_icon.google {
+    font-size: 16px;
+  }
+
+  .logo {
+    width: 125px;
+    margin: 0 auto;
+    margin-top: 50px;
+    opacity: 70%;
+  }
+}

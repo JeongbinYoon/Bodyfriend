@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Header from "../header/header";
 
 const Main = ({ authService }) => {
   const onLogout = () => {
@@ -8,7 +9,7 @@ const Main = ({ authService }) => {
 
   return (
     <>
-      <h1>main</h1>
+      <Header title={"main"} />
       {onLogout && (
         <Link to="/login">
           <button>Login</button>
