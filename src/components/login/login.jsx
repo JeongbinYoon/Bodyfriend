@@ -21,10 +21,13 @@ const Login = ({ authService }) => {
   };
 
   const navigate = useNavigate();
-  const goToHome = (userId) => {
-    navigate({
-      pathname: "/",
-      state: { id: userId },
+  const goToHome = (userId, displayName, photoURL) => {
+    navigate("/", {
+      state: {
+        id: userId,
+        name: displayName,
+        profileImg: photoURL,
+      },
     });
   };
 
@@ -35,7 +38,8 @@ const Login = ({ authService }) => {
       .emailLogin(emailInput.current.value, pwInput.current.value)
       .then((data) => {
         console.log(data);
-        goToHome(data.user.uid);
+        let name = data.user.email.split("@")[0];
+        goToHome(data.user.uid, name, data.user.photoURL);
       });
   };
 
@@ -45,72 +49,70 @@ const Login = ({ authService }) => {
       .login(event.currentTarget.dataset.snstype)
       .then((data) => {
         console.log(data);
-        goToHome(data.user.uid);
+        goToHome(data.user.uid, data.user.displayName, data.user.photoURL);
       });
   };
 
-  useEffect(() => {
-    authService.onAuthChange((user) => {
-      user && goToHome(user.uid);
-    });
-  });
+  // useEffect(() => {
+  //   authService.onAuthChange((user) => {
+  //     user && goToHome(user.uid);
+  //   });
+  // });
 
   return (
-    <div className={styles.login}>
+    <>
       <Header title={"로그인"} />
-      <form>
-        <div className={styles.login_id}>
-          <input ref={emailInput} type="email" placeholder="아이디" />
-          <FontAwesomeIcon className={styles.id_icon} icon={faEnvelope} />
+      <div className={styles.login}>
+        <form>
+          <div className={styles.login_id}>
+            <input ref={emailInput} type="email" placeholder="아이디" />
+            <FontAwesomeIcon className={styles.id_icon} icon={faEnvelope} />
+          </div>
+          <div className={styles.login_pw}>
+            <input ref={pwInput} type="password" placeholder="비밀번호" />
+            <FontAwesomeIcon className={styles.pw_icon} icon={faLock} />
+          </div>
+          <button onClick={onEmailLogin} className={styles.loginBtn}>
+            로그인
+          </button>
+        </form>
+        <div className={styles.sub}>
+          <a href="#">
+            <span onClick={() => setCancelBtnClicked(true)}>계정찾기</span>
+          </a>
+          <Link to="/createUser">
+            <span>회원가입</span>
+          </Link>
         </div>
-        <div className={styles.login_pw}>
-          <input ref={pwInput} type="password" placeholder="비밀번호" />
-          <FontAwesomeIcon className={styles.pw_icon} icon={faLock} />
+        <div className={styles.sns}>
+          <button onClick={onLogin} data-snstype="Facebook">
+            <FontAwesomeIcon
+              className={`${styles.sns_icon} ${styles.facebook}`}
+              icon={faFacebookF}
+            />
+          </button>
+          <button onClick={onLogin} data-snstype="Twitter">
+            <FontAwesomeIcon
+              className={`${styles.sns_icon} ${styles.twitter}`}
+              icon={faTwitter}
+            />
+          </button>
+          <button onClick={onLogin} data-snstype="Google">
+            <FontAwesomeIcon
+              className={`${styles.sns_icon} ${styles.google}`}
+              icon={faGoogle}
+            />
+          </button>
         </div>
-        <button onClick={onEmailLogin} className={styles.loginBtn}>
-          로그인
-        </button>
-      </form>
-      <div className={styles.sub}>
-        <a href="#">
-          <span onClick={() => setCancelBtnClicked(true)}>계정찾기</span>
-        </a>
-        <Link to="/createUser">
-          <span>회원가입</span>
-        </Link>
+        <img className={styles.logo} src="./images/bf_logo.png" alt="logo" />
+        {isCancelBtnClicked && (
+          <Alert_findUser
+            onCancelBtnClick={handleCancelBtnClick}
+            authService={authService}
+          />
+        )}
       </div>
-      <div className={styles.sns}>
-        <button onClick={onLogin} data-snstype="Facebook">
-          <FontAwesomeIcon
-            className={`${styles.sns_icon} ${styles.facebook}`}
-            icon={faFacebookF}
-          />
-        </button>
-        <button onClick={onLogin} data-snstype="Twitter">
-          <FontAwesomeIcon
-            className={`${styles.sns_icon} ${styles.twitter}`}
-            icon={faTwitter}
-          />
-        </button>
-        <button onClick={onLogin} data-snstype="Google">
-          <FontAwesomeIcon
-            className={`${styles.sns_icon} ${styles.google}`}
-            icon={faGoogle}
-          />
-        </button>
-      </div>
-      <img
-        className={styles.logo}
-        src="./images/login/bf_logo.png"
-        alt="logo"
-      />
-      {isCancelBtnClicked && (
-        <Alert_findUser
-          onCancelBtnClick={handleCancelBtnClick}
-          authService={authService}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

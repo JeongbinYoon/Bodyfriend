@@ -16,7 +16,6 @@
   }
 
   .login a {
-    text-decoration: none;
     color: color-grey;
   }
 
@@ -42,7 +41,7 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    color: color-darkBlack;
+    color: color-grey;
   }
 
   .login input {

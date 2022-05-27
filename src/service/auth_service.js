@@ -7,7 +7,7 @@ class AuthService {
     const authProvider = new firebase.auth[`${providerName}AuthProvider`]();
     console.log("login");
     console.log(providerName);
-    return firebaseApp.auth().signInWithRedirect(authProvider);
+    return firebaseApp.auth().signInWithPopup(authProvider);
   }
 
   emailLogin(email, password) {
