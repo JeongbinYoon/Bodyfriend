@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styles from "./app.module.css";
+import Admin from "./components/admin/admin";
 import CreateUser from "./components/login/createUser";
 import Login from "./components/login/login";
 import Main from "./components/main/main";
@@ -22,6 +23,7 @@ function App({ authService }) {
             element={<CreateUser authService={authService} />}
           />
           <Route exact path="/rent" element={<Rent />} />
+          <Route exact path="/admin" element={<Admin />} />
         </Routes>
       </Router>
     </div>

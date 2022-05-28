@@ -17,10 +17,10 @@ const Main = ({ authService }) => {
     const q = query(collection(dbService, "chair"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      const chairObj = {
+      let chairObj = {
         ...doc.data(),
-        id: doc.id,
       };
+      chairObj.item.id = doc.id;
       setChairs((prev) => [chairObj, ...prev]);
     });
   };
