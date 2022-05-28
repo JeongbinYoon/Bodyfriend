@@ -4,25 +4,51 @@ import styles from "./main.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import HeaderMain from "../header/header_main";
+import { dbService } from "../../service/firebase";
+import { collection, addDoc, getDocs, query } from "firebase/firestore";
+import Main_friendmall from "./main_friendmall";
 
 const Main = ({ authService }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
+
+  // 의자 데이터 로드
+  const [chairs, setChairs] = useState("");
+  const getChairs = async () => {
+    const q = query(collection(dbService, "chair"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const chairObj = {
+        ...doc.data(),
+        id: doc.id,
+      };
+      setChairs((prev) => [chairObj, ...prev]);
+    });
+  };
+
+  useEffect(() => {
+    getChairs();
+  }, []);
 
   const onLogout = () => {
     console.log("로그아웃");
     authService.logout();
   };
 
-  useEffect(() => {
-    authService.onAuthChange((user) => {
-      user && setLoggedIn(true);
-      !user && setLoggedIn(false);
-    });
-  });
+  // useEffect(() => {
+  //   authService.onAuthChange((user) => {
+  //     if (user) {
+  //       // console.log(user);
+  //       setLoggedIn(true);
+  //     } else {
+  //       setLoggedIn(false);
+  //     }
+  //   });
+  // });
 
-  const location = useLocation();
-  console.log("state", location.state);
+  // const location = useLocation();
+  // console.log("state", location.state);
 
+  console.log(chairs);
   return (
     <>
       <HeaderMain />
@@ -59,6 +85,8 @@ const Main = ({ authService }) => {
             </button>
           </>
         )}
+
+        {chairs && <Main_friendmall chairs={chairs} />}
       </div>
     </>
   );

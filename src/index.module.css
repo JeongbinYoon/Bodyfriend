@@ -14,6 +14,12 @@ a {
   color: color-darkBlack;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 input {
   outline: none;
 }

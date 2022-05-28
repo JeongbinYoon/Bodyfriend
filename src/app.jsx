@@ -3,6 +3,7 @@ import styles from "./app.module.css";
 import CreateUser from "./components/login/createUser";
 import Login from "./components/login/login";
 import Main from "./components/main/main";
+import Rent from "./components/rent/rent";
 
 function App({ authService }) {
   return (
@@ -20,6 +21,7 @@ function App({ authService }) {
             path="/createUser"
             element={<CreateUser authService={authService} />}
           />
+          <Route exact path="/rent" element={<Rent />} />
         </Routes>
       </Router>
     </div>
