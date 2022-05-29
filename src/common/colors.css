@@ -1,8 +1,11 @@
 @value color-white: #FFFFFF;
 @value color-grey: #959595;
+@value color-light-grey: #EEEEEE;
 @value color-ivory: #F8F8F8;
 @value color-black: #000000;
 @value color-darkBlack: #333333;
 @value color-brown: #B4875E;
 @value color-gold: #A8996E;
+
 @value line-grey: #E1E1E1;
+@value shadow-grey: #CCCCCC;

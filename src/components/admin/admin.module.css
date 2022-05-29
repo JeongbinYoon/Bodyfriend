@@ -1,0 +1,30 @@
+@value font-mMedium, radius-small, font-btn from '../../common/size.css';
+@value color-white, color-light-grey, line-grey, shadow-grey from '../../common/colors.css';
+
+.admin {
+  padding: 20px;
+  margin-top: 46px;
+  background-color: color-light-grey;
+}
+
+.section {
+  margin-bottom: 10px;
+  background-color: color-white;
+  border-radius: radius-small;
+  box-shadow: 0px 1px 3px shadow-grey;
+}
+
+.sectionHeader {
+  padding: 11px 16px;
+  border-bottom: 1px solid line-grey;
+}
+
+.sectionHeader .sectionTitle {
+  font-size: font-mMedium;
+  font-weight: 400;
+  margin: 0;
+}
+
+.sectionBody {
+  padding: 11px 16px;
+}
