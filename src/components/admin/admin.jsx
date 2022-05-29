@@ -1,11 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { dbService } from "../../service/firebase";
 import { collection, addDoc, getDocs, query } from "firebase/firestore";
-const Admin = (props) => {
+const Admin = ({ authService }) => {
+  const [userId, setUserID] = useState("");
+  useEffect(() => {
+    authService.onAuthChange((user) => {
+      if (user) {
+        console.log(user);
+        setUserID(user.uid);
+      } else {
+        setUserID(null);
+      }
+    });
+  });
+
   const [item, setValues] = useState({
     name: "",
-    price: "",
-    rentPrice: "",
+    price: 0,
+    rentPrice: 0,
     imgURL: "",
   });
   const itemNameRef = useRef();
@@ -15,17 +27,18 @@ const Admin = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setValues({
-      itemName: itemNameRef.current.value,
-      price: itemPriceRef.current.value,
-      rentPrice: itemRentPriceRef.current.value,
+      name: itemNameRef.current.value,
+      price: Number(itemPriceRef.current.value),
+      rentPrice: Number(itemRentPriceRef.current.value),
       imgURL: "",
     });
     try {
       const docRef = await addDoc(collection(dbService, "chair"), {
         item,
         createdAt: Date.now(),
+        creatorId: userId,
       });
-      console.log("Document written with ID: ", docRef.id);
+      //   console.log("Document written with ID: ", docRef.id);
     } catch (error) {
       console.error("Error adding document: ", error);
     }

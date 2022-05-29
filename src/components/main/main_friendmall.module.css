@@ -55,6 +55,10 @@
     margin: 0 10px;
   }
 
+  .item .imgbox {
+    height: 115px;
+  }
+
   .item .img {
     width: 100%;
   }

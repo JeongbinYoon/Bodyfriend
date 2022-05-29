@@ -23,7 +23,11 @@ function App({ authService }) {
             element={<CreateUser authService={authService} />}
           />
           <Route exact path="/rent" element={<Rent />} />
-          <Route exact path="/admin" element={<Admin />} />
+          <Route
+            exact
+            path="/admin"
+            element={<Admin authService={authService} />}
+          />
         </Routes>
       </Router>
     </div>
