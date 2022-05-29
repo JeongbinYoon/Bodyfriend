@@ -3,7 +3,6 @@ import { dbService } from "../../service/firebase";
 import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
 import adminStyles from "./admin.module.css";
 import styles from "./admin_product.module.css";
-import Header_admin from "../header/header_admin";
 
 const Admin_prodcut = ({ userId }) => {
   // 의자 데이터 로드
@@ -25,6 +24,7 @@ const Admin_prodcut = ({ userId }) => {
   }, []);
 
   // 아이템 등록
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [item, setValues] = useState({
     name: "",
     price: 0,
@@ -35,24 +35,30 @@ const Admin_prodcut = ({ userId }) => {
   const itemPriceRef = useRef();
   const itemRentPriceRef = useRef();
 
-  const onSubmit = async (e) => {
+  useEffect(() => {
+    if (isSubmitted) {
+      const date = new Date();
+      let createdAt =
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+      const docRef = addDoc(collection(dbService, "chair"), {
+        item,
+        createdAt: createdAt,
+        creatorId: userId,
+      });
+      setIsSubmitted(false);
+    }
+  }, [item]);
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    setValues({
+    setIsSubmitted(true);
+    setValues((prev) => ({
       name: itemNameRef.current.value,
       price: Number(itemPriceRef.current.value),
       rentPrice: Number(itemRentPriceRef.current.value),
       imgURL: "",
-    });
-    try {
-      const docRef = await addDoc(collection(dbService, "chair"), {
-        item,
-        createdAt: Date.now(),
-        creatorId: userId,
-      });
-      //   console.log("Document written with ID: ", docRef.id);
-    } catch (error) {
-      console.error("Error adding document: ", error);
-    }
+    }));
   };
 
   console.log(chairs);
@@ -60,10 +66,52 @@ const Admin_prodcut = ({ userId }) => {
     <>
       <section className={adminStyles.section}>
         <div className={adminStyles.sectionHeader}>
-          <h2 className={adminStyles.sectionTitle}>등록 상품</h2>
+          <h2 className={adminStyles.sectionTitle}>등록 제품</h2>
         </div>
-        <div className={adminStyles.sectionBody}>asd</div>
-        <ul></ul>
+        <div className={adminStyles.sectionBody}>
+          <table className={styles.productTable}>
+            <thead>
+              <tr>
+                <th>선택</th>
+                <th>이미지</th>
+                <th>제품명</th>
+                <th>가격</th>
+                <th>렌탈가</th>
+                <th className={styles.hide}>날짜</th>
+                <th className={styles.hide}>작성자</th>
+              </tr>
+            </thead>
+            <tbody>
+              {chairs &&
+                chairs.map((chair) => (
+                  <tr key={chair.id}>
+                    <td className={styles.checkBox}>
+                      <input type="checkbox" />
+                    </td>
+                    <td>
+                      <img
+                        width="30"
+                        src={chair.item.imgURL}
+                        alt="productImg"
+                      />
+                    </td>
+                    <td className={styles.name}>{chair.item.name}</td>
+                    <td>{chair.item.price.toLocaleString()}</td>
+                    <td>{chair.item.rentPrice.toLocaleString()}</td>
+                    <td className={styles.hide}>{chair.createdAt}</td>
+                    <td className={styles.hide}>{chair.creatorId}</td>
+                  </tr>
+                ))}
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <td colSpan="4">제품수</td>
+                <td>{chairs.length}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </section>
       <form onSubmit={onSubmit}>
         <input ref={itemNameRef} type="text" placeholder="제품명" />

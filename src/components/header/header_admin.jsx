@@ -15,7 +15,7 @@ const HeaderMain = () => {
       <button>
         <FontAwesomeIcon icon={faBars} />
       </button>
-      <h1 className={styles.title}>상품</h1>
+      <h1 className={styles.title}>제품</h1>
       <button onClick={goToHome}>
         <FontAwesomeIcon icon={faXmark} />
       </button>
