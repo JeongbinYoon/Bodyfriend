@@ -1,14 +1,26 @@
 import React, { useRef, useState, useEffect } from "react";
 import { dbService } from "../../service/firebase";
-import { collection, addDoc, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  orderBy,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import adminStyles from "./admin.module.css";
 import styles from "./admin_product.module.css";
+import Admin_products_item from "./admin_products_item";
 
 const Admin_prodcut = ({ userId }) => {
   // 의자 데이터 로드
   const [chairs, setChairs] = useState("");
   const getChairs = async () => {
-    const q = query(collection(dbService, "chair"));
+    const q = query(
+      collection(dbService, "chair"),
+      orderBy("createdAt", "desc")
+    );
     onSnapshot(q, (snapshot) => {
       const chairArr = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -37,13 +49,9 @@ const Admin_prodcut = ({ userId }) => {
 
   useEffect(() => {
     if (isSubmitted) {
-      const date = new Date();
-      let createdAt =
-        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-
       const docRef = addDoc(collection(dbService, "chair"), {
         item,
-        createdAt: createdAt,
+        createdAt: Date.now(),
         creatorId: userId,
       });
       setIsSubmitted(false);
@@ -82,26 +90,11 @@ const Admin_prodcut = ({ userId }) => {
               </tr>
             </thead>
             <tbody>
-              {chairs &&
-                chairs.map((chair) => (
-                  <tr key={chair.id}>
-                    <td className={styles.checkBox}>
-                      <input type="checkbox" />
-                    </td>
-                    <td>
-                      <img
-                        width="30"
-                        src={chair.item.imgURL}
-                        alt="productImg"
-                      />
-                    </td>
-                    <td className={styles.name}>{chair.item.name}</td>
-                    <td>{chair.item.price.toLocaleString()}</td>
-                    <td>{chair.item.rentPrice.toLocaleString()}</td>
-                    <td className={styles.hide}>{chair.createdAt}</td>
-                    <td className={styles.hide}>{chair.creatorId}</td>
-                  </tr>
-                ))}
+              {chairs
+                ? chairs.map((chair) => (
+                    <Admin_products_item item={chair} key={chair.id} />
+                  ))
+                : null}
             </tbody>
 
             <tfoot>

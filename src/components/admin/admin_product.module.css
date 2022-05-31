@@ -41,6 +41,11 @@
     border-bottom: 1px solid line-grey;
   }
 
+  .productTable tbody .deletBtn button {
+    background-color: transparent;
+    border: none;
+  }
+
   .productTable tbody .name {
     padding-left: 5px;
     text-align: left;
