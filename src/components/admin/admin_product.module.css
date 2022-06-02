@@ -1,5 +1,5 @@
 @values color-grey, line-grey from '../../common/colors.css';
-@values font-mTiny, font-mMedium from '../../common/size.css';
+@values font-mTiny, font-mMedium, radius-small from '../../common/size.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -18,6 +18,9 @@
 }
 /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
 @media all and (max-width: 767px) {
+  .productContainer {
+  }
+
   .productTable,
   .productTable td,
   .productTable th {
@@ -57,5 +60,21 @@
 
   .productTable .hide {
     display: none;
+  }
+
+  .productContainer .btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+
+  .productContainer .btns .nextBtn,
+  .productContainer .btns .prevBtn {
+    width: 50px;
+    height: 30px;
+    margin-left: 5px;
+    background-color: color-light-grey;
+    border-radius: radius-small;
+    border: 1px solid line-grey;
   }
 }

@@ -4,6 +4,10 @@ import {
   collection,
   addDoc,
   orderBy,
+  limit,
+  startAt,
+  startAfter,
+  endAt,
   onSnapshot,
   query,
 } from "firebase/firestore";
@@ -15,13 +19,57 @@ import Admin_products_item from "./admin_products_item";
 
 const Admin_prodcut = ({ userId }) => {
   // 의자 데이터 로드
-  const [chairs, setChairs] = useState("");
-  const getChairs = async () => {
-    const q = query(
+  let first;
+  let pageSize = 10;
+  const [pageNow, setPageNow] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const prevBtnClick = () => {
+    getChairs();
+    setPageNow(pageNow > 1 ? pageNow - 1 : 1);
+  };
+  const nextBtnClick = () => {
+    let totalPage = Math.floor(totalCount / pageSize) + 1;
+    setPageNow(totalPage > pageNow ? pageNow + 1 : totalPage);
+    let first = query(
       collection(dbService, "chair"),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
+      limit(pageSize)
     );
-    onSnapshot(q, (snapshot) => {
+    let next;
+    onSnapshot(first, (snapshot) => {
+      let last = snapshot.docs[snapshot.docs.length - 1];
+      console.log(last);
+      next = query(
+        collection(dbService, "chair"),
+        orderBy("createdAt", "desc"),
+        startAfter(last.data().createdAt),
+        limit(pageSize)
+      );
+      onSnapshot(next, (snapshot) => {
+        const chairArr = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setChairs(chairArr);
+      });
+      // first = next;
+    });
+  };
+
+  const [chairs, setChairs] = useState("");
+  const getChairs = () => {
+    let total = query(collection(dbService, "chair"));
+    onSnapshot(total, (snapshot) => {
+      setTotalCount(snapshot.docs.length);
+    });
+
+    first = query(
+      collection(dbService, "chair"),
+      orderBy("createdAt", "desc"),
+      limit(pageSize)
+    );
+
+    onSnapshot(first, (snapshot) => {
       const chairArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -76,7 +124,9 @@ const Admin_prodcut = ({ userId }) => {
         <div className={adminStyles.sectionHeader}>
           <h2 className={adminStyles.sectionTitle}>등록 제품</h2>
         </div>
-        <div className={adminStyles.sectionBody}>
+        <div
+          className={`${adminStyles.sectionBody} ${styles.productContainer}`}
+        >
           <table className={styles.productTable}>
             <thead>
               <tr>
@@ -99,11 +149,23 @@ const Admin_prodcut = ({ userId }) => {
 
             <tfoot>
               <tr>
-                <td colSpan="4">제품수</td>
-                <td>{chairs.length}</td>
+                <td colSpan="2">제품 수</td>
+                <td>{totalCount}</td>
+                <td colSpan="3">
+                  페이지
+                  {`${pageNow} / ${Math.floor(totalCount / pageSize) + 1}`}
+                </td>
               </tr>
             </tfoot>
           </table>
+          <div className={styles.btns}>
+            <button className={styles.prevBtn} onClick={prevBtnClick}>
+              이전
+            </button>
+            <button className={styles.nextBtn} onClick={nextBtnClick}>
+              다음
+            </button>
+          </div>
         </div>
       </section>
       <form onSubmit={onSubmit}>
