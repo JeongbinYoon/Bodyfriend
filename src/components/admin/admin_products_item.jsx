@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import styles from "./admin_product.module.css";
 import { dbService } from "../../service/firebase";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
 const Admin_products_item = ({ item }) => {
   let createdDate = new Date(item.createdAt);

@@ -1,0 +1,96 @@
+@values color-black, color-dark-grey, color-grey, color-white from '../../../common/colors.css';
+@values font-mMedium, font-mExtraLarge from '../../../common/size.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .sidebar {
+    position: relative;
+    margin-left: calc(-50vw + 50%);
+    left: -100vw;
+    top: -20px;
+    transition: 0.2s;
+    z-index: 10;
+  }
+
+  .sidebar.clicked {
+    transform: translateX(100vw);
+  }
+
+  .sidebarContainer {
+    width: 230px;
+    height: 100vh;
+    padding-top: 10px;
+    box-sizing: border-box;
+    background-color: color-dark-grey;
+    position: absolute;
+    left: 0;
+    top: -46px;
+    z-index: 100;
+    color: color-white;
+    font-size: font-mMedium;
+  }
+
+  .bg {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: -46px;
+    z-index: 10;
+    background-color: color-black;
+    opacity: 50%;
+  }
+
+  .sidebarContainer ul > li {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+
+  .sidebarContainer ul > li .menuIcon {
+    margin-left: 20px;
+    color: color-grey;
+    font-size: font-mExtraLarge;
+  }
+
+  .sidebarContainer ul > li span {
+    margin-left: 15px;
+  }
+
+  .sidebarContainer h2 {
+    margin: 20px 0 0 20px;
+    color: color-grey;
+    font-size: font-mMedium;
+  }
+
+  .adminProfile {
+    display: flex;
+    align-items: center;
+  }
+
+  .adminProfile .adminImgBox {
+    width: 25px;
+    height: 25px;
+    margin-left: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .adminProfile .adminImgBox img {
+    width: 100%;
+  }
+
+  .closeBtn {
+    margin-left: auto;
+    margin-right: 10px;
+    color: color-white;
+    font-size: font-mExtraLarge;
+    background-color: transparent;
+    border: 0;
+  }
+}

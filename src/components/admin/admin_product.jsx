@@ -11,8 +11,6 @@ import {
   onSnapshot,
   query,
 } from "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import adminStyles from "./admin.module.css";
 import styles from "./admin_product.module.css";
 import Admin_products_item from "./admin_products_item";
