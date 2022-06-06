@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import styles from "./admin_product.module.css";
-import { dbService } from "../../service/firebase";
+import { dbService } from "../../../service/firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 
 const Admin_products_item = ({ item }) => {

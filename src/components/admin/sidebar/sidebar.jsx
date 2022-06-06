@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./sidebar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,10 +10,26 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar = ({ onSidebarClicked, onCloseSidebar }) => {
-  console.log(onSidebarClicked);
+const Sidebar = ({
+  onSidebarClicked,
+  onCloseSidebar,
+  nickname,
+  onShowWhat,
+}) => {
+  let navigate = useNavigate();
+  const goToHome = () => {
+    navigate("/");
+  };
+  const goToOrder = () => {
+    navigate("/admin/order");
+  };
+
   const handleCloseSidebar = () => {
     onCloseSidebar(false);
+  };
+
+  const handleShowWhat = (e) => {
+    onShowWhat(e);
   };
   return (
     <div
@@ -22,7 +39,7 @@ const Sidebar = ({ onSidebarClicked, onCloseSidebar }) => {
           : `${styles.sidebar}`
       }
     >
-      <div className={styles.bg}></div>
+      <div onClick={handleCloseSidebar} className={styles.bg}></div>
 
       <div className={styles.sidebarContainer}>
         <ul>
@@ -33,12 +50,12 @@ const Sidebar = ({ onSidebarClicked, onCloseSidebar }) => {
                 alt="adminImg"
               />
             </div>
-            <span className={styles.adminName}>admin1</span>
+            <span className={styles.adminName}>{nickname}</span>
             <button onClick={handleCloseSidebar} className={styles.closeBtn}>
               <FontAwesomeIcon icon={faBars} />
             </button>
           </li>
-          <li>
+          <li onClick={goToHome}>
             <FontAwesomeIcon
               className={styles.menuIcon}
               icon={faArrowUpRightFromSquare}
@@ -48,18 +65,36 @@ const Sidebar = ({ onSidebarClicked, onCloseSidebar }) => {
         </ul>
         <h2>사이트관리</h2>
         <ul>
-          <li>
+          <li
+            data-menu="product"
+            onClick={(e) => {
+              handleShowWhat(e);
+              handleCloseSidebar();
+            }}
+          >
             <FontAwesomeIcon className={styles.menuIcon} icon={faListCheck} />
             <span>제품관리</span>
           </li>
-          <li>
+          <li
+            data-menu="order"
+            onClick={(e) => {
+              handleShowWhat(e);
+              handleCloseSidebar();
+            }}
+          >
             <FontAwesomeIcon
               className={styles.menuIcon}
               icon={faMoneyCheckDollar}
             />
             <span>제품주문</span>
           </li>
-          <li>
+          <li
+            data-menu="rental"
+            onClick={(e) => {
+              handleShowWhat(e);
+              handleCloseSidebar();
+            }}
+          >
             <FontAwesomeIcon
               className={styles.menuIcon}
               icon={faPeopleCarryBox}

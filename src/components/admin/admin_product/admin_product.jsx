@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { dbService } from "../../service/firebase";
+import { dbService } from "../../../service/firebase";
 import {
   collection,
   addDoc,
@@ -11,7 +11,7 @@ import {
   onSnapshot,
   query,
 } from "firebase/firestore";
-import adminStyles from "./admin.module.css";
+import adminStyles from "../admin.module.css";
 import styles from "./admin_product.module.css";
 import Admin_products_item from "./admin_products_item";
 
