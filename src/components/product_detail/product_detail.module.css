@@ -1,0 +1,158 @@
+@value font-btn, font-mSmall, font-mMedium, font-mLarge, font-mExtraLarge from '../../common/size.css';
+@value color-white, color-light-brown,color-brown, gradient-brown, color-gold, color-grey, color-light-grey, line-grey from '../../common/colors.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .imgBox {
+    padding: 20px;
+  }
+
+  .imgBox img {
+    width: 100%;
+  }
+  .itemName {
+    margin: 0 20px 10px 20px;
+    font-size: font-mExtraLarge;
+  }
+
+  .itemInfo {
+    margin: 0 20px;
+    padding-bottom: 20px;
+    text-align: right;
+    border-bottom: 1px solid line-grey;
+  }
+
+  .itemInfo p {
+    font-size: font-mExtraLarge;
+    font-weight: 700;
+  }
+
+  .itemInfo p:nth-child(1) {
+    margin-bottom: 5px;
+  }
+
+  .itemInfo p span:nth-child(1) {
+    font-size: font-mMedium;
+  }
+
+  .itemInfo p span:nth-child(2) {
+    color: color-grey;
+    font-size: font-mMedium;
+  }
+
+  .findStore {
+    padding: 6px 0;
+    background-color: color-light-grey;
+  }
+
+  .findStore .store_bg {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 20px;
+    background-color: color-white;
+  }
+
+  .findStore .storeIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    border-radius: 50%;
+    color: color-white;
+    background-color: color-light-brown;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .findStore .storeIcon .iconLight {
+    width: 200%;
+    height: 24px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 50%
+    );
+    opacity: 50%;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .findStore .txts p:first-child {
+    font-size: font-mMedium;
+    font-weight: 700;
+  }
+
+  .findStore .txts p:last-child {
+    font-size: font-mMedium;
+    color: color-brown;
+  }
+
+  .findStore .nextIcon {
+    margin-left: auto;
+    color: color-grey;
+  }
+
+  .infoTabContainer {
+    padding-bottom: 6px;
+    background-color: color-light-grey;
+  }
+
+  .infoTab {
+    display: flex;
+    background-color: color-white;
+  }
+
+  .infoTab li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    color: color-grey;
+    font-size: font-mMedium;
+    font-weight: 700;
+    border-bottom: 2px solid line-grey;
+  }
+
+  .infoTab li.active {
+    color: color-gold;
+    border-bottom: 2px solid color-gold;
+  }
+
+  .detailImgs img {
+    width: 100%;
+  }
+
+  .btns {
+    width: 100%;
+    border-top: 1px solid line-grey;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .btns button {
+    width: 50%;
+    height: 45px;
+    background-color: color-white;
+    font-size: font-btn;
+    font-weight: 700;
+    border: none;
+  }
+
+  .btns button:last-child {
+    background: gradient-brown;
+    color: color-white;
+  }
+}

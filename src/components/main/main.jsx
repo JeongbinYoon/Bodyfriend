@@ -17,7 +17,7 @@ const Main = ({ authService }) => {
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
         setLoggedIn(true);
       } else {
         setLoggedIn(false);

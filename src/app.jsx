@@ -5,6 +5,7 @@ import Admin_order from "./components/admin/admin_order/admin_order";
 import CreateUser from "./components/login/createUser";
 import Login from "./components/login/login";
 import Main from "./components/main/main";
+import Product_detail from "./components/product_detail/product_detail";
 import Rent from "./components/rent/rent";
 
 function App({ authService }) {
@@ -22,6 +23,11 @@ function App({ authService }) {
             exact
             path="/createUser"
             element={<CreateUser authService={authService} />}
+          />
+          <Route
+            exact
+            path="/product/productDetail"
+            element={<Product_detail />}
           />
           <Route exact path="/rent" element={<Rent />} />
           <Route

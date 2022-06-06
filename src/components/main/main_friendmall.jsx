@@ -1,7 +1,7 @@
 import styles from "./main_friendmall.module.css";
 import React, { useState, useEffect } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-
+import { useNavigate } from "react-router-dom";
 import { dbService } from "../../service/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
@@ -56,7 +56,17 @@ const Main_friendmall = () => {
     getChairs();
   }, []);
 
-  console.log(chairs);
+  // 상세 페이지 이동
+  let navigate = useNavigate();
+  const goToProductDetail = (item) => {
+    navigate("/product/productDetail", {
+      state: {
+        item,
+      },
+    });
+  };
+
+  // console.log(chairs);
   return (
     <>
       {chairs && (
@@ -69,7 +79,13 @@ const Main_friendmall = () => {
           <div className={styles.itemsContainer}>
             <ul className={styles.items}>
               {chairs.map((chair) => (
-                <li className={styles.item} key={chair.id}>
+                <li
+                  onClick={() => {
+                    goToProductDetail(chair);
+                  }}
+                  className={styles.item}
+                  key={chair.id}
+                >
                   <div className={styles.imgbox}>
                     <img
                       className={styles.img}
