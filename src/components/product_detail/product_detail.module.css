@@ -1,4 +1,4 @@
-@value font-btn, font-mSmall, font-mMedium, font-mLarge, font-mExtraLarge from '../../common/size.css';
+@value font-btn, font-mSmall, font-mRegular, font-mMedium, font-mLarge, font-mExtraLarge, font-btn from '../../common/size.css';
 @value color-white, color-light-brown,color-brown, gradient-brown, color-gold, color-grey, color-light-grey, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
@@ -46,6 +46,7 @@
     font-size: font-mMedium;
   }
 
+  /* 전시장 찾기 */
   .findStore {
     padding: 6px 0;
     background-color: color-light-grey;
@@ -103,11 +104,7 @@
     color: color-grey;
   }
 
-  .infoTabContainer {
-    padding-bottom: 6px;
-    background-color: color-light-grey;
-  }
-
+  /* 메뉴 탭 */
   .infoTab {
     display: flex;
     background-color: color-white;
@@ -123,17 +120,105 @@
     font-size: font-mMedium;
     font-weight: 700;
     border-bottom: 2px solid line-grey;
+    box-sizing: border-box;
   }
 
   .infoTab li.active {
-    color: color-gold;
-    border-bottom: 2px solid color-gold;
+    color: color-brown;
+    border-bottom: 2px solid color-brown;
+  }
+
+  /* 메뉴 탭 - 상세정보 */
+  .detail {
+    padding: 6px 0 45px 0;
+    background-color: color-light-grey;
+  }
+  .detailImgBox {
+    height: 607px;
+    overflow: hidden;
+  }
+
+  .detailImgBox.active {
+    height: fit-content;
+    overflow: visible;
   }
 
   .detailImgs img {
+    display: block;
     width: 100%;
   }
 
+  .moreBtn {
+    padding: 20px;
+    background-color: color-white;
+  }
+
+  .moreBtn button {
+    width: 100%;
+    height: 40px;
+    background-color: color-white;
+    font-size: font-btn;
+    font-weight: 700;
+    border: 1px solid line-grey;
+  }
+
+  .moreBtn .downIcon {
+    margin-left: 5px;
+    color: color-grey;
+  }
+
+  /* 메뉴 탭 - 배송/교환/반품 */
+  .inquiryContainer {
+    background-color: color-light-grey;
+    padding: 6px 0;
+  }
+
+  .inquiry {
+    padding: 20px;
+    background-color: color-white;
+  }
+
+  .inquiry button {
+    width: 100%;
+    height: 35px;
+    background-color: transparent;
+    font-size: font-btn;
+    font-weight: 700;
+    border: 1px solid line-grey;
+  }
+
+  .inquiry p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: font-mRegular;
+  }
+
+  .delivery {
+    padding: 20px 20px 65px 20px;
+    font-size: font-mRegular;
+  }
+
+  .delivery h3 {
+    margin: 0;
+    font-size: font-mMedium;
+  }
+
+  .delivery > ol {
+    margin: 0 0 10px 0;
+    padding-left: 15px;
+    list-style-type: decimal-leading-zero;
+  }
+
+  .delivery > ol > li {
+    margin-top: 10px;
+  }
+
+  .delivery > ol > ol {
+    padding: 0;
+    list-style-type: decimal;
+  }
+
+  /* 구매, 렌탈상담 신청 버튼 */
   .btns {
     width: 100%;
     border-top: 1px solid line-grey;
