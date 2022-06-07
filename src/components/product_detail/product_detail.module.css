@@ -1,5 +1,5 @@
 @value font-btn, font-mSmall, font-mRegular, font-mMedium, font-mLarge, font-mExtraLarge, font-btn from '../../common/size.css';
-@value color-white, color-light-brown,color-brown, gradient-brown, color-gold, color-grey, color-light-grey, line-grey from '../../common/colors.css';
+@value color-white, color-light-brown, color-brown, gradient-brown, color-gold, color-grey, color-light-grey, color-black, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -25,7 +25,6 @@
     margin: 0 20px;
     padding-bottom: 20px;
     text-align: right;
-    border-bottom: 1px solid line-grey;
   }
 
   .itemInfo p {
@@ -219,15 +218,14 @@
   }
 
   /* 구매, 렌탈상담 신청 버튼 */
-  .btns {
+  .orderBtns {
     width: 100%;
-    border-top: 1px solid line-grey;
     position: fixed;
     bottom: 0;
     left: 0;
   }
 
-  .btns button {
+  .orderBtns button {
     width: 50%;
     height: 45px;
     background-color: color-white;
@@ -236,8 +234,107 @@
     border: none;
   }
 
-  .btns button:last-child {
+  .orderBtns .buyBtn {
+    border-top: 1px solid line-grey;
+  }
+  .orderBtns .rentBtn {
     background: gradient-brown;
     color: color-white;
+  }
+
+  /* 구매, 렌탈상담 신청 버튼 클릭 */
+  .orderBg {
+    width: 100vw;
+    height: 100vh;
+    background-color: color-black;
+    opacity: 50%;
+    position: fixed;
+    top: 0;
+  }
+
+  .orderContainer {
+    width: 100%;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    background-color: color-light-grey;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .orderForm {
+    padding: 15px;
+    background-color: color-white;
+  }
+
+  .orderForm h3 {
+    color: color-grey;
+    font-size: font-mLarge;
+    margin: 0;
+  }
+
+  .selectBox {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid line-grey;
+    line-height: 24px;
+  }
+
+  .selectBox:focus {
+    outline: none;
+  }
+
+  .selectBox option {
+    display: block;
+    height: 40px;
+  }
+
+  .selectBox option:focus {
+    background-color: transparent;
+    color: red;
+    border: none;
+  }
+
+  .result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+  }
+
+  .countBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+  }
+
+  .countBtn button {
+    width: 28px;
+    height: 28px;
+    background-color: transparent;
+    color: color-grey;
+    border: 1px solid line-grey;
+    border-radius: 50%;
+  }
+
+  .price {
+    font-size: font-mMedium;
+  }
+
+  .price span:first-child {
+    font-size: font-mExtraLarge;
+    font-weight: 700;
+  }
+
+  .orderBtn {
+    width: 100%;
+    height: 45px;
+    margin-top: 20px;
+    background: gradient-brown;
+    color: color-white;
+    font-size: font-btn;
+    font-weight: 700;
+    border: none;
   }
 }

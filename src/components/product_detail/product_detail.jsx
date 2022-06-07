@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_detail.module.css";
@@ -8,6 +8,8 @@ import {
   faAngleRight,
   faAngleDown,
   faAngleUp,
+  faMinus,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Product_detail = () => {
@@ -39,6 +41,47 @@ const Product_detail = () => {
     detailImgBox.current.classList.toggle(`${styles["active"]}`);
     isMoreBtnClicked ? setIsMoreBtnClicked(false) : setIsMoreBtnClicked(true);
   };
+
+  // 주문 버튼 클릭
+  const [isOrderBtnClicked, setIsOrderBtnClicked] = useState(false);
+  const [orderBtn, setOrderBtn] = useState("");
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const body = document.querySelector("body");
+  const orderbtnClick = (e) => {
+    setIsOrderBtnClicked(true);
+    setOrderBtn(e.target.dataset.orderbtn);
+    setScrollPosition(window.pageYOffset);
+  };
+
+  // 수량 선택
+  const [count, setCount] = useState(1);
+  const countUp = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  const countDown = () => {
+    setCount((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  // 주문 창 닫기
+  const orderClose = () => {
+    body.style.removeProperty("overflow");
+    body.style.removeProperty("position");
+    body.style.removeProperty("top");
+    body.style.removeProperty("width");
+    window.scrollTo(0, scrollPosition);
+    setIsOrderBtnClicked(false);
+  };
+
+  // 팝업시 스크롤 방지
+  useEffect(() => {
+    if (scrollPosition !== 0) {
+      body.style.overflow = "hidden";
+      body.style.position = "fixed";
+      body.style.top = `-${scrollPosition}px`;
+      body.style.width = "100%";
+    }
+  }, [scrollPosition]);
 
   return (
     <div className={styles.productDetail}>
@@ -200,10 +243,72 @@ const Product_detail = () => {
         ) : null
       }
 
-      <div className={styles.btns}>
-        <button>구매하기</button>
-        <button>렌탈상담 신청</button>
+      {/* 주문 버튼 */}
+      <div className={styles.orderBtns}>
+        <button
+          data-orderbtn={"buy"}
+          onClick={orderbtnClick}
+          className={styles.buyBtn}
+        >
+          구매하기
+        </button>
+        <button
+          data-orderbtn={"rent"}
+          onClick={orderbtnClick}
+          className={styles.rentBtn}
+        >
+          렌탈상담 신청
+        </button>
       </div>
+
+      {/* 주문 버튼 클릭시 */}
+      {isOrderBtnClicked ? (
+        <>
+          <div onClick={orderClose} className={styles.orderBg}></div>
+
+          <div className={styles.orderContainer}>
+            <div className={styles.orderForm}>
+              <h3>색상</h3>
+              {item.colors && (
+                <select className={styles.selectBox} name="color">
+                  {item.colors.map((color) => (
+                    <option key={color} value={color}>
+                      {color}
+                    </option>
+                  ))}
+                </select>
+              )}
+
+              <div className={styles.result}>
+                <div className={styles.countBtn}>
+                  <button onClick={countDown}>
+                    <FontAwesomeIcon icon={faMinus} />
+                  </button>
+                  <span>{count}</span>
+                  <button onClick={countUp}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                </div>
+
+                <div className={styles.price}>
+                  <span>
+                    {orderBtn === "buy"
+                      ? (item.price * count).toLocaleString()
+                      : (item.rentPrice * count).toLocaleString()}
+                  </span>
+                  <span> 원</span>
+                </div>
+              </div>
+            </div>
+
+            {orderBtn === "buy" ? (
+              <button className={styles.orderBtn}>구매하기</button>
+            ) : (
+              <button className={styles.orderBtn}>렌탈상담 신청</button>
+            )}
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };
