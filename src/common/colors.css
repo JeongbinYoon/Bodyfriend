@@ -9,6 +9,7 @@
 @value color-light-brown: #CEA075;
 @value color-gold: #A8996E;
 
+@value btn-grey: #DDDDDD;
 @value line-grey: #E1E1E1;
 @value shadow-grey: #CCCCCC;
 @value gradient-brown: linear-gradient(90deg, rgba(218, 186, 138, 1) 0%, rgba(206, 160, 117, 1) 50%);

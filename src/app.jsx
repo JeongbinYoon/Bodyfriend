@@ -6,7 +6,7 @@ import CreateUser from "./components/login/createUser";
 import Login from "./components/login/login";
 import Main from "./components/main/main";
 import Product_detail from "./components/product_detail/product_detail";
-import Rent from "./components/rent/rent";
+import Product_order from "./components/product_order/product_order";
 
 function App({ authService }) {
   return (
@@ -29,7 +29,11 @@ function App({ authService }) {
             path="/product/productDetail"
             element={<Product_detail />}
           />
-          <Route exact path="/rent" element={<Rent />} />
+          <Route
+            exact
+            path="/product/productOrder"
+            element={<Product_order />}
+          />
           <Route
             exact
             path="/admin"

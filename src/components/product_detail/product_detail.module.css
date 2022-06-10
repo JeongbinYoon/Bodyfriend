@@ -1,5 +1,5 @@
 @value font-btn, font-mSmall, font-mRegular, font-mMedium, font-mLarge, font-mExtraLarge, font-btn from '../../common/size.css';
-@value color-white, color-light-brown, color-brown, gradient-brown, color-gold, color-grey, color-light-grey, color-black, line-grey from '../../common/colors.css';
+@value color-white, color-ivory, color-light-brown, color-brown, gradient-brown, color-gold, color-grey, color-black, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -48,7 +48,7 @@
   /* 전시장 찾기 */
   .findStore {
     padding: 6px 0;
-    background-color: color-light-grey;
+    background-color: color-ivory;
   }
 
   .findStore .store_bg {
@@ -130,7 +130,7 @@
   /* 메뉴 탭 - 상세정보 */
   .detail {
     padding: 6px 0 45px 0;
-    background-color: color-light-grey;
+    background-color: color-ivory;
   }
   .detailImgBox {
     height: 607px;
@@ -168,7 +168,7 @@
 
   /* 메뉴 탭 - 배송/교환/반품 */
   .inquiryContainer {
-    background-color: color-light-grey;
+    background-color: color-ivory;
     padding: 6px 0;
   }
 
@@ -256,7 +256,7 @@
     width: 100%;
     padding: 20px 15px;
     box-sizing: border-box;
-    background-color: color-light-grey;
+    background-color: color-ivory;
     position: fixed;
     bottom: 0;
   }

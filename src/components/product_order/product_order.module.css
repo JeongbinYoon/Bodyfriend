@@ -1,0 +1,182 @@
+@value font-btn, font-mRegular, font-mMedium, radius-small from '../../common/size.css';
+@value color-white, btn-grey, gradient-brown, color-grey, color-ivory, shadow-grey, line-grey from '../../common/colors.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  /* 유저 정보 */
+  .productOrder {
+    background-color: color-ivory;
+    margin-bottom: 45px;
+  }
+
+  .userInfo {
+    background-color: color-white;
+    padding: 20px;
+  }
+
+  .userInfo label {
+    display: block;
+    font-size: font-mRegular;
+  }
+
+  .userInfo label[for="userNumber"] {
+    margin-top: 20px;
+  }
+
+  .userInfo input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid line-grey;
+  }
+
+  /* 신청상품 */
+  .selectedItemBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    margin-top: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: color-white;
+  }
+
+  .selectedItem h2 {
+    margin: 0;
+    font-size: font-mMedium;
+    font-weight: 700;
+  }
+
+  .selectedItem .itemInfoContainer {
+    padding: 20px;
+    background-color: color-ivory;
+  }
+
+  .itemInfoContainer .itemInfo {
+    padding: 15px;
+    background-color: color-white;
+    border-radius: radius-small;
+    box-shadow: 0 3px 15px shadow-grey;
+  }
+
+  .itemInfo .itemInfoDetail {
+    display: flex;
+  }
+
+  .itemImgBox {
+    flex-basis: 70px;
+    flex-grow: 1;
+  }
+
+  .itemInfo img {
+    width: 100%;
+    min-width: 70px;
+  }
+
+  .itemText {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+
+  .itemInfo .itemText h3 {
+    margin: 0;
+  }
+
+  .itemInfo .itemText > div {
+    display: flex;
+    margin-top: 10px;
+    font-size: font-mRegular;
+  }
+
+  .itemInfo .itemText span.itemTextOption,
+  .itemInfo .itemText span.itemTextDelivery {
+    flex-shrink: 0;
+    height: fit-content;
+    margin-right: 5px;
+    padding: 3px;
+    color: color-grey;
+    border: 1px solid line-grey;
+    border-radius: radius-small;
+  }
+
+  .itemInfo .itemText > div > span:last-child {
+    padding-top: 3px;
+  }
+
+  /* 상담 요청시간 */
+  .consultation {
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  .consultation h2 {
+    margin: 0;
+    font-size: font-mMedium;
+    font-weight: 700;
+  }
+
+  .requestTime {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid line-grey;
+    outline: none;
+  }
+
+  .agreeAllBtn {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin: 20px 0 5px 0;
+    padding-left: 15px;
+    box-sizing: border-box;
+    border: 1px solid line-grey;
+  }
+
+  .agreeAllBtn p {
+    margin-left: 10px;
+    font-size: font-mMedium;
+  }
+
+  .agree1 {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .agreeList {
+    padding-left: 10px;
+    color: color-grey;
+  }
+
+  .agreeList p {
+    margin-left: 10px;
+    font-size: font-mMedium;
+  }
+
+  .agreeList .icon {
+    margin-left: auto;
+  }
+
+  .submitBtn {
+    width: 100%;
+    height: 45px;
+    background-color: btn-grey;
+    color: color-white;
+    font-size: font-btn;
+    font-weight: 700;
+    border: 0;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .submitBtn.active {
+    background: gradient-brown;
+  }
+}

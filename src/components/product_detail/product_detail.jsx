@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_detail.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,6 +71,7 @@ const Product_detail = () => {
     body.style.removeProperty("width");
     window.scrollTo(0, scrollPosition);
     setIsOrderBtnClicked(false);
+    setCount(1);
   };
 
   // 팝업시 스크롤 방지
@@ -82,6 +83,26 @@ const Product_detail = () => {
       body.style.width = "100%";
     }
   }, [scrollPosition]);
+
+  // 구매, 렌탈 상담 버튼 클릭
+  const colorRef = useRef();
+  const order = () => {
+    const color = colorRef.current.options[colorRef.current.selectedIndex].text;
+    goToProductOrder(color, count);
+  };
+
+  // 구매 페이지 이동
+  let navigate = useNavigate();
+  const goToProductOrder = (color) => {
+    navigate("/product/productOrder", {
+      state: {
+        item,
+        color,
+        count,
+        orderBtn,
+      },
+    });
+  };
 
   return (
     <div className={styles.productDetail}>
@@ -270,7 +291,11 @@ const Product_detail = () => {
             <div className={styles.orderForm}>
               <h3>색상</h3>
               {item.colors && (
-                <select className={styles.selectBox} name="color">
+                <select
+                  ref={colorRef}
+                  className={styles.selectBox}
+                  name="color"
+                >
                   {item.colors.map((color) => (
                     <option key={color} value={color}>
                       {color}
@@ -302,9 +327,13 @@ const Product_detail = () => {
             </div>
 
             {orderBtn === "buy" ? (
-              <button className={styles.orderBtn}>구매하기</button>
+              <button onClick={order} className={styles.orderBtn}>
+                구매하기
+              </button>
             ) : (
-              <button className={styles.orderBtn}>렌탈상담 신청</button>
+              <button onClick={order} className={styles.orderBtn}>
+                렌탈상담 신청
+              </button>
             )}
           </div>
         </>
