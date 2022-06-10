@@ -32,7 +32,7 @@ function App({ authService }) {
           <Route
             exact
             path="/product/productOrder"
-            element={<Product_order />}
+            element={<Product_order authService={authService} />}
           />
           <Route
             exact
