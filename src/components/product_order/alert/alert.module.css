@@ -1,0 +1,61 @@
+@value font-btn, font-mMedium, radius-small from '../../../common/size.css';
+@value line-grey, color-white, color-grey, gradient-brown from '../../../common/colors.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .bg {
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    opacity: 50%;
+    position: fixed;
+    top: 0;
+  }
+
+  .alertContainer {
+    width: 80%;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: color-white;
+    opacity: 100%;
+    border-radius: radius-small;
+  }
+
+  .alertHeader {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 15px;
+    font-size: font-mMedium;
+    font-weight: 700;
+    border-bottom: 1px solid line-grey;
+  }
+
+  .alertBody {
+    padding: 20px 15px;
+    text-align: center;
+    font-size: font-mMedium;
+  }
+
+  .alertFooter {
+    display: flex;
+  }
+
+  .alertFooter button {
+    width: 100%;
+    height: 50px;
+    background: gradient-brown;
+    color: color-white;
+    font-size: font-btn;
+    border: none;
+    border-radius: 0 0 radius-small radius-small;
+  }
+}

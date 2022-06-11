@@ -20,6 +20,7 @@ import {
   faAngleDown,
   faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
+import Alert from "./alert/alert";
 
 const Product_order = ({ authService }) => {
   const [userId, setUserId] = useState("");
@@ -70,7 +71,6 @@ const Product_order = ({ authService }) => {
     // 모두 체크했을 경우
     if (agreeCount === lists.length) {
       submitRef.current.classList.add(`${styles["active"]}`);
-      console.log(agreeAllRef.current.checked);
       agreeAllRef.current.checked = true;
       submitRef.current.disabled = false;
     } else {
@@ -97,6 +97,7 @@ const Product_order = ({ authService }) => {
   };
 
   // 주문 등록 (firebase)
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const nameRef = useRef();
   const numberRef = useRef();
   const timeRef = useRef();
@@ -104,12 +105,15 @@ const Product_order = ({ authService }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (nameRef.current.value === "") {
-      alert("이름을 입력해주세요");
+      setAlertType("name");
+      setIsAlert(true);
       return;
     } else if (numberRef.current.value.length !== 11) {
-      alert("휴대폰 번호를 정확히 입력해주세요");
+      setAlertType("number");
+      setIsAlert(true);
       return;
     }
+    setIsSubmitted(true);
     const order = {
       type,
       color,
@@ -131,6 +135,26 @@ const Product_order = ({ authService }) => {
 
     nameRef.current.value = "";
     numberRef.current.value = "";
+  };
+
+  // Alert 확인
+  const [alertType, setAlertType] = useState("");
+  const [isAlert, setIsAlert] = useState(false);
+  const handleCheckAlert = () => {
+    setIsSubmitted(false);
+    setIsAlert(false);
+    setAlertType("");
+  };
+
+  const popupAlert = (title, content, btnName) => {
+    return (
+      <Alert
+        title={title}
+        content={content}
+        btnName={btnName}
+        onCheckAlert={handleCheckAlert}
+      />
+    );
   };
 
   return (
@@ -248,6 +272,17 @@ const Product_order = ({ authService }) => {
           />
         </div>
       </form>
+
+      {/* 신청하기 클릭시 입력 정보 확인 */}
+      {isAlert === true && alertType === "name"
+        ? popupAlert("알림", "이름을 입력해주세요.", "확인")
+        : isAlert === true && alertType === "number"
+        ? popupAlert("알림", "전화번호를 정확히 입력해주세요.", "확인")
+        : null}
+
+      {/* 신청하기 클릭 */}
+      {isSubmitted &&
+        popupAlert("알림", "렌탈상담 신청이 완료되었습니다.", "확인")}
     </div>
   );
 };
