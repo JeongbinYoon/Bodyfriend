@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { dbService } from "../../../service/firebase";
+import { dbService, storageService } from "../../../service/firebase";
 import {
   collection,
   addDoc,
@@ -11,6 +11,7 @@ import {
   onSnapshot,
   query,
 } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 import adminStyles from "../admin.module.css";
 import styles from "./admin_product.module.css";
 import Admin_products_item from "./admin_products_item";
@@ -81,41 +82,78 @@ const Admin_prodcut = ({ userId }) => {
     getChairs();
   }, []);
 
-  // 아이템 등록
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [item, setValues] = useState({
-    name: "",
-    price: 0,
-    rentPrice: 0,
-    imgURL: "",
-  });
+  // 이미지 선택
+  const fileInput = useRef();
+  const [fileName, setFileName] = useState();
+  const [attachment, setAttachment] = useState("");
+  const onFileChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const theFile = files[0];
+    setFileName(theFile.name.split(".")[0]);
+
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+
+  // 파일 미리보기 지우기
+  const onClearAttachment = () => {
+    setAttachment("");
+    fileInput.current.value = null;
+  };
+
+  // Submit
+  const formRef = useRef();
   const itemNameRef = useRef();
   const itemPriceRef = useRef();
   const itemRentPriceRef = useRef();
 
-  useEffect(() => {
-    if (isSubmitted) {
-      const docRef = addDoc(collection(dbService, "chair"), {
-        item,
-        createdAt: Date.now(),
-        creatorId: userId,
-      });
-      setIsSubmitted(false);
-    }
-  }, [item]);
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setValues((prev) => ({
+    let attachmentURL = "";
+    // 사진이 있는 경우 Storage에 등록
+    if (attachment !== "") {
+      const attachmentRef = ref(storageService, `productImg/${fileName}`);
+      const response = await uploadString(
+        attachmentRef,
+        attachment,
+        "data_url"
+      );
+      attachmentURL = await getDownloadURL(response.ref);
+    }
+
+    const item = {
       name: itemNameRef.current.value,
       price: Number(itemPriceRef.current.value),
       rentPrice: Number(itemRentPriceRef.current.value),
-      imgURL: "",
-    }));
+      imgURL: attachmentURL,
+    };
+
+    // db 업로드
+    await addDoc(collection(dbService, "chair"), {
+      item,
+      createdAt: Date.now(),
+      creatorId: userId,
+    });
+
+    // input 초기화
+    onClearAttachment();
+    const inputList = formRef.current.childNodes;
+    [...inputList].map((input) => {
+      if (input.type !== "submit") {
+        input.value = null;
+      }
+    });
   };
 
-  console.log(chairs);
+  // console.log(chairs);
   return (
     <>
       <section className={adminStyles.section}>
@@ -166,10 +204,22 @@ const Admin_prodcut = ({ userId }) => {
           </div>
         </div>
       </section>
-      <form onSubmit={onSubmit}>
+      <form ref={formRef} onSubmit={onSubmit}>
         <input ref={itemNameRef} type="text" placeholder="제품명" />
         <input ref={itemPriceRef} type="number" placeholder="가격" />
         <input ref={itemRentPriceRef} type="number" placeholder="렌트가" />
+        <input
+          ref={fileInput}
+          onChange={onFileChange}
+          type="file"
+          accept="image/*"
+        />
+        {attachment && (
+          <div>
+            <img src={attachment} alt="" width="50px" height="50px" />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
+        )}
         <input type="submit" value="등록" />
       </form>
     </>

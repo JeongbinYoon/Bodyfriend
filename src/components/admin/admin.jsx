@@ -14,7 +14,7 @@ const Admin = ({ authService }) => {
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (user) {
-        console.log(user);
+        // console.log(user);
         setUserID(user.uid);
         setNickname(user.email.split("@")[0]);
       } else {
