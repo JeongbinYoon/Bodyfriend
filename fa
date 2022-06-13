@@ -1,0 +1,137 @@
+[33mcommit bd123b7737a69c547d12fed76afc7deb133ec492[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sun Jun 12 21:22:45 2022 +0900
+
+    Admin product component - Upload product image to storage and make URL
+
+[33mcommit d385b7bb8de3cb53dbca602ef1b3dd33cca91e52[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sat Jun 11 18:48:34 2022 +0900
+
+    Product order component - Popup alert component
+
+[33mcommit 75984c4a7e41954126cb008ed8db5018790e5b25[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Fri Jun 10 12:45:08 2022 +0900
+
+    Product order component - Upload ordered item to Database
+
+[33mcommit 7146baa5a452da91abe033008823c0a4ccb76b02[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Fri Jun 10 10:32:49 2022 +0900
+
+    Product order component - rental
+
+[33mcommit e3e7861b44b257c17cb8d54e81e9364c91cd759c[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue Jun 7 17:02:46 2022 +0900
+
+    Product detail component - Pop up, prevents scrolling
+
+[33mcommit dabe44b704d42efc4b630c04621c982afb55639f[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue Jun 7 12:13:38 2022 +0900
+
+    Product detail component - Tab menu
+
+[33mcommit 3ef1fe855fb847ee94b62bf7368488804aeb2b61[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Mon Jun 6 23:40:18 2022 +0900
+
+    Product detail component- JSX&CSS
+
+[33mcommit 4efde0285a0488c5f26587ec92c1be528ce364df[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Mon Jun 6 14:48:56 2022 +0900
+
+    Admin component - Change components when clicked on menu
+
+[33mcommit 9f5a2796c9406c94f7dff9d002be0846961dc13c[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Thu Jun 2 18:08:27 2022 +0900
+
+    Sidebar component
+
+[33mcommit a085a2af3b7bc9fdc5aa38b80a631ca28189f57f[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Thu Jun 2 15:30:30 2022 +0900
+
+    Admin product component - pagination
+
+[33mcommit c4a303664281bc37b4d4076f5125fb7c0b2c64d6[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 31 12:49:12 2022 +0900
+
+    Admin product component - delete product
+
+[33mcommit f9a86f33d8a305f13b253a0264fcff90e704d079[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sun May 29 19:08:12 2022 +0900
+
+    Admin product component - read and add product
+
+[33mcommit 11e2d9e77d264959ff003c50bf7b3007e9ffa765[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sun May 29 13:06:36 2022 +0900
+
+    Make common admin component styles
+
+[33mcommit 5ae45e36293c0ce086cb1436bccdb6d7d4982929[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sun May 29 11:44:00 2022 +0900
+
+    Move dbDownload function to friendmall component, Set realtime change db
+
+[33mcommit 0aed94a6fbb63613615d72b70e64e7da9ce2b70c[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sat May 28 21:49:40 2022 +0900
+
+    Add database upload functionality
+
+[33mcommit 6a0e43d0ec6a507249bb7beaca5d6006e98c8876[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Sat May 28 12:44:32 2022 +0900
+
+    Load chair data from firestoreDB
+
+[33mcommit c7cb02f8dbe03dd36b489a2c3242e4593517fde8[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Fri May 27 12:32:34 2022 +0900
+
+    Header_main, Forwarding login info state
+
+[33mcommit 90283e298673fffa98c626c660dfb365546ceb65[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Wed May 25 02:01:11 2022 +0900
+
+    Login component - Create id pw, reset pw
+
+[33mcommit f38cfb042b24370e0e5bb9545c60f55136a7e7b0[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 24 23:51:32 2022 +0900
+
+    Login component - email
+
+[33mcommit eb3ba45714d4240ae995b630b8c5801296e36b1d[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 24 22:53:59 2022 +0900
+
+    Login component - facebook, twitter
+
+[33mcommit 91e98345fdd65c2be8134f1d0cd1f0a28ba82528[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 24 17:54:26 2022 +0900
+
+    Login component - google
+
+[33mcommit 0dbde56649b0c22053e1e718586d4c199e296ece[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 24 11:03:18 2022 +0900
+
+    Router, firebase login
+
+[33mcommit f07caa34527c005a39a3319759f9a0a6d29a0d4f[m
+Author: Jeongbin <yon980824@gmail.com>
+Date:   Tue May 17 11:36:46 2022 +0900
+
+    Project setting

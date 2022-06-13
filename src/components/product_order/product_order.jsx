@@ -21,6 +21,7 @@ import {
   faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
 import Alert from "./alert/alert";
+import Postcode from "../product_detail/postcode";
 
 const Product_order = ({ authService }) => {
   const [userId, setUserId] = useState("");
@@ -43,8 +44,6 @@ const Product_order = ({ authService }) => {
   let color = location.state.color;
   let count = location.state.count;
   let type = location.state.orderBtn;
-  // console.log(item);
-  // console.log(`수량 ${count} 색상 : ${color} ${type}`);
 
   // 토글
   const [isClicked, setIsClicked] = useState(false);
@@ -85,7 +84,6 @@ const Product_order = ({ authService }) => {
   const agreeAllChanged = (e) => {
     let lists = agreeUlRef.current.childNodes;
     [...lists].map((li) => (li.childNodes[0].checked = e.target.checked));
-    // console.log(submitRef.current);
     if (e.target.checked) {
       submitRef.current.classList.add(`${styles["active"]}`);
       agreeAllRef.current.checked = true;
@@ -96,14 +94,16 @@ const Product_order = ({ authService }) => {
     }
   };
 
-  // 주문 등록 (firebase)
+  // 주문 등록 (firebase) Submit
   const [isSubmitted, setIsSubmitted] = useState(false);
   const nameRef = useRef();
   const numberRef = useRef();
   const timeRef = useRef();
+  const [address, setAddress] = useState();
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // 유효성 검사
     if (nameRef.current.value === "") {
       setAlertType("name");
       setIsAlert(true);
@@ -114,6 +114,7 @@ const Product_order = ({ authService }) => {
       return;
     }
     setIsSubmitted(true);
+
     const order = {
       type,
       color,
@@ -127,14 +128,15 @@ const Product_order = ({ authService }) => {
       number: numberRef.current.value,
       mail: userMail,
     };
-    const docRef = addDoc(collection(dbService, "order"), {
+
+    address && Object.assign(userInfo, { address });
+
+    // db 업로드
+    addDoc(collection(dbService, "order"), {
       item,
       order,
       userInfo,
     });
-
-    nameRef.current.value = "";
-    numberRef.current.value = "";
   };
 
   // Alert 확인
@@ -157,6 +159,11 @@ const Product_order = ({ authService }) => {
     );
   };
 
+  // 주소
+  const handleAddress = (addressResult) => {
+    setAddress(addressResult);
+  };
+
   return (
     <div className={styles.productOrder}>
       {type === "buy" ? (
@@ -175,6 +182,7 @@ const Product_order = ({ authService }) => {
             type="number"
             placeholder="- 없이 숫자만 입력"
           />
+          {type === "buy" ? <Postcode onAddress={handleAddress} /> : null}
         </div>
         <div className={styles.selectedItem}>
           <div onClick={toggle} className={styles.selectedItemBtn}>
@@ -215,17 +223,19 @@ const Product_order = ({ authService }) => {
               </div>
             </div>
           ) : null}
-
-          <div className={styles.consultation}>
-            <h2>상담 요청시간</h2>
-            <select ref={timeRef} className={styles.requestTime} name="time">
-              <option value="전체 09:00 ~ 18:00">전체 09:00 ~ 18:00</option>
-              <option value="오전 09:00 ~ 12:00">오전 09:00 ~ 12:00</option>
-              <option value="점심 12:00 ~ 13:00">점심 12:00 ~ 13:00</option>
-              <option value="점심 13:00 ~ 14:00">점심 13:00 ~ 14:00</option>
-              <option value="오후 14:00 ~ 17:00">오후 14:00 ~ 17:00</option>
-            </select>
-
+          {type === "rent" ? (
+            <div className={styles.consultation}>
+              <h2>상담 요청시간</h2>
+              <select ref={timeRef} className={styles.requestTime} name="time">
+                <option value="전체 09:00 ~ 18:00">전체 09:00 ~ 18:00</option>
+                <option value="오전 09:00 ~ 12:00">오전 09:00 ~ 12:00</option>
+                <option value="점심 12:00 ~ 13:00">점심 12:00 ~ 13:00</option>
+                <option value="점심 13:00 ~ 14:00">점심 13:00 ~ 14:00</option>
+                <option value="오후 14:00 ~ 17:00">오후 14:00 ~ 17:00</option>
+              </select>
+            </div>
+          ) : null}
+          <div className={styles.agree}>
             <div className={styles.agreeAllBtn}>
               <input
                 ref={agreeAllRef}
@@ -281,8 +291,11 @@ const Product_order = ({ authService }) => {
         : null}
 
       {/* 신청하기 클릭 */}
-      {isSubmitted &&
-        popupAlert("알림", "렌탈상담 신청이 완료되었습니다.", "확인")}
+      {isSubmitted === true && type === "rent"
+        ? popupAlert("알림", "렌탈상담 신청이 완료되었습니다.", "확인")
+        : isSubmitted === true && type === "buy"
+        ? popupAlert("알림", "상품 주문이 완료되었습니다.", "확인")
+        : null}
     </div>
   );
 };

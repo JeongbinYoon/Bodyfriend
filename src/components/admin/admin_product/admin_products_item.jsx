@@ -2,8 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import styles from "./admin_product.module.css";
-import { dbService } from "../../../service/firebase";
+import { dbService, storageService } from "../../../service/firebase";
 import { doc, deleteDoc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 
 const Admin_products_item = ({ item }) => {
   let createdDate = new Date(item.createdAt);
@@ -25,6 +26,9 @@ const Admin_products_item = ({ item }) => {
     if (ok) {
       const itemObj = doc(dbService, "chair", `${item.id}`);
       await deleteDoc(itemObj);
+      if (item.item.imgURL !== "") {
+        await deleteObject(ref(storageService, item.item.imgURL));
+      }
     }
   };
 

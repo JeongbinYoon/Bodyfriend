@@ -1,5 +1,5 @@
 @value font-btn, font-mRegular, font-mMedium, radius-small from '../../common/size.css';
-@value color-white, btn-grey, gradient-brown, color-grey, color-ivory, shadow-grey, line-grey from '../../common/colors.css';
+@value color-white, color-brown, btn-grey, gradient-brown, color-grey, color-ivory, shadow-grey, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -33,7 +33,13 @@
     width: 100%;
     height: 40px;
     border: none;
+    padding: 0;
     border-bottom: 1px solid line-grey;
+    box-sizing: border-box;
+  }
+
+  .userInfo input:focus {
+    border-bottom: 1px solid color-brown;
   }
 
   /* 신청상품 */
@@ -112,7 +118,7 @@
 
   /* 상담 요청시간 */
   .consultation {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     background-color: #ffffff;
   }
   .consultation h2 {
@@ -129,11 +135,17 @@
     outline: none;
   }
 
+  /* 동의 */
+  .agree {
+    padding: 20px;
+    /* box-sizing: border-box; */
+    background-color: color-white;
+  }
+
   .agreeAllBtn {
     display: flex;
     align-items: center;
     height: 50px;
-    margin: 20px 0 5px 0;
     padding-left: 15px;
     box-sizing: border-box;
     border: 1px solid line-grey;
@@ -151,7 +163,7 @@
   }
 
   .agreeList {
-    padding-left: 10px;
+    padding: 0 20px;
     color: color-grey;
   }
 

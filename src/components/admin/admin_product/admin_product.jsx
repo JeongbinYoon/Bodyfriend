@@ -120,7 +120,10 @@ const Admin_prodcut = ({ userId }) => {
     let attachmentURL = "";
     // 사진이 있는 경우 Storage에 등록
     if (attachment !== "") {
-      const attachmentRef = ref(storageService, `productImg/${fileName}`);
+      const attachmentRef = ref(
+        storageService,
+        `product/${itemNameRef.current.value}`
+      );
       const response = await uploadString(
         attachmentRef,
         attachment,

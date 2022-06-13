@@ -1,0 +1,26 @@
+@values font-mMedium from '../../common/size.css';
+@values color-brown from '../../common/colors.css';
+
+.postcode h2 {
+  margin: 20px 0 0 0;
+  font-size: font-mMedium;
+}
+
+.postcode input:disabled {
+  background-color: transparent;
+}
+
+.postcode input:focus {
+  border-bottom: 1px solid color-brown;
+}
+
+.findInput {
+  display: flex;
+}
+
+.findBtn {
+  flex-basis: 40px;
+  background-color: transparent;
+  color: color-brown;
+  font-weight: 700;
+}
