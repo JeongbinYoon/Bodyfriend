@@ -1,10 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./alert.module.css";
 
-const Alert = ({ onCheckAlert, title, content, btnName }) => {
+const Alert = ({ onCheckAlert, title, content, btnName, path }) => {
+  const navigate = useNavigate();
+  const goTo = () => {
+    navigate(path);
+  };
+
   const handleCheckAlert = () => {
     onCheckAlert(true);
+    path && goTo();
   };
+
   return (
     <div className={styles.alert}>
       <div className={styles.bg}></div>

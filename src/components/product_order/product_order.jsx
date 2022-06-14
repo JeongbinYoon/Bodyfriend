@@ -103,6 +103,7 @@ const Product_order = ({ authService }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(address);
     // 유효성 검사
     if (nameRef.current.value === "") {
       setAlertType("name");
@@ -112,14 +113,24 @@ const Product_order = ({ authService }) => {
       setAlertType("number");
       setIsAlert(true);
       return;
+    } else if (type === "buy") {
+      if (
+        address === undefined ||
+        address.detailAddress === "" ||
+        address.adress === "" ||
+        address.zonecode === ""
+      ) {
+        setAlertType("address");
+        setIsAlert(true);
+        return;
+      }
     }
-    setIsSubmitted(true);
 
     const order = {
       type,
       color,
       count,
-      time: timeRef.current.value,
+      // time: timeRef.current.value,
       OrderdAt: Date.now(),
     };
     const userInfo = {
@@ -128,8 +139,13 @@ const Product_order = ({ authService }) => {
       number: numberRef.current.value,
       mail: userMail,
     };
+    console.log(address);
 
-    address && Object.assign(userInfo, { address });
+    if (type === "rent") {
+      Object.assign(order, { time: timeRef.current.value });
+    } else if (type === "buy") {
+      address && Object.assign(userInfo, { address });
+    }
 
     // db 업로드
     addDoc(collection(dbService, "order"), {
@@ -137,6 +153,7 @@ const Product_order = ({ authService }) => {
       order,
       userInfo,
     });
+    setIsSubmitted(true);
   };
 
   // Alert 확인
@@ -148,13 +165,14 @@ const Product_order = ({ authService }) => {
     setAlertType("");
   };
 
-  const popupAlert = (title, content, btnName) => {
+  const popupAlert = (title, content, btnName, path) => {
     return (
       <Alert
         title={title}
         content={content}
         btnName={btnName}
         onCheckAlert={handleCheckAlert}
+        path={path}
       />
     );
   };
@@ -218,6 +236,21 @@ const Product_order = ({ authService }) => {
                         무료배송 (제주도 및 도서산간 지역 추가 운임비 발생)
                       </span>
                     </div>
+                    {type === "buy" ? (
+                      <span className={styles.itemPrice}>
+                        <span className={styles.price}>
+                          {item.price.toLocaleString()}
+                        </span>{" "}
+                        원
+                      </span>
+                    ) : (
+                      <span className={styles.itemPrice}>
+                        <span className={styles.price}>
+                          {item.rentPrice.toLocaleString()}
+                        </span>{" "}
+                        원 / 월
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -259,27 +292,58 @@ const Product_order = ({ authService }) => {
                 </label>
                 <FontAwesomeIcon className={styles.icon} icon={faAngleRight} />
               </li>
-              <li className={styles.agree1}>
-                <input
-                  onChange={agreeListChanged}
-                  type="checkbox"
-                  id="agree2"
-                />
-                <label htmlFor="agree2">
-                  <p>[필수] 개인정보 제공 동의</p>
-                </label>
-                <FontAwesomeIcon className={styles.icon} icon={faAngleRight} />
-              </li>
+              {type === "buy" ? (
+                <>
+                  <li className={styles.agree1}>
+                    <input
+                      onChange={agreeListChanged}
+                      type="checkbox"
+                      id="agree2"
+                    />
+                    <label htmlFor="agree2">
+                      <p>[필수] 결제대행 서비스 이용약관 동의</p>
+                    </label>
+                    <FontAwesomeIcon
+                      className={styles.icon}
+                      icon={faAngleRight}
+                    />
+                  </li>
+                  <li className={styles.agree1}>
+                    <input
+                      onChange={agreeListChanged}
+                      type="checkbox"
+                      id="agree3"
+                    />
+                    <label htmlFor="agree3">
+                      <p>[필수] 구매조건 확인 및 결제 동의</p>
+                    </label>
+                    <FontAwesomeIcon
+                      className={styles.icon}
+                      icon={faAngleRight}
+                    />
+                  </li>
+                </>
+              ) : null}
             </ul>
           </div>
 
-          <input
-            type="submit"
-            ref={submitRef}
-            className={styles.submitBtn}
-            value="신청하기"
-            disabled
-          />
+          {type === "buy" ? (
+            <input
+              type="submit"
+              ref={submitRef}
+              className={styles.submitBtn}
+              value={`${item.price.toLocaleString()} 원 결제하기`}
+              disabled
+            />
+          ) : (
+            <input
+              type="submit"
+              ref={submitRef}
+              className={styles.submitBtn}
+              value="신청하기"
+              disabled
+            />
+          )}
         </div>
       </form>
 
@@ -288,13 +352,15 @@ const Product_order = ({ authService }) => {
         ? popupAlert("알림", "이름을 입력해주세요.", "확인")
         : isAlert === true && alertType === "number"
         ? popupAlert("알림", "전화번호를 정확히 입력해주세요.", "확인")
+        : isAlert === true && alertType === "address"
+        ? popupAlert("알림", "주소를 정확히 입력해주세요.", "확인")
         : null}
 
       {/* 신청하기 클릭 */}
       {isSubmitted === true && type === "rent"
-        ? popupAlert("알림", "렌탈상담 신청이 완료되었습니다.", "확인")
+        ? popupAlert("알림", "렌탈상담 신청이 완료되었습니다.", "확인", "/")
         : isSubmitted === true && type === "buy"
-        ? popupAlert("알림", "상품 주문이 완료되었습니다.", "확인")
+        ? popupAlert("알림", "상품 주문이 완료되었습니다.", "확인", "/")
         : null}
     </div>
   );

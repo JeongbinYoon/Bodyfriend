@@ -1,4 +1,4 @@
-@value font-btn, font-mRegular, font-mMedium, radius-small from '../../common/size.css';
+@value font-mExtraLarge, font-btn, font-mRegular, font-mMedium, radius-small from '../../common/size.css';
 @value color-white, color-brown, btn-grey, gradient-brown, color-grey, color-ivory, shadow-grey, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
@@ -114,6 +114,17 @@
 
   .itemInfo .itemText > div > span:last-child {
     padding-top: 3px;
+  }
+
+  .itemInfo .itemPrice {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: font-mMedium;
+  }
+
+  .itemInfo .itemPrice .price {
+    font-size: font-mExtraLarge;
+    font-weight: 700;
   }
 
   /* 상담 요청시간 */

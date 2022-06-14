@@ -27,7 +27,7 @@ function App({ authService }) {
           <Route
             exact
             path="/product/productDetail"
-            element={<Product_detail />}
+            element={<Product_detail authService={authService} />}
           />
           <Route
             exact

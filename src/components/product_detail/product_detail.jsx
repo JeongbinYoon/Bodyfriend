@@ -12,7 +12,24 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Product_detail = () => {
+const Product_detail = ({ authService }) => {
+  // 로그인 여부
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  useEffect(() => {
+    authService.onAuthChange((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+  });
+
+  // 로그인 페이지 이동
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
   const [tabName, setTabName] = useState("detail");
   const location = useLocation();
   const item = location.state.item.item;
@@ -48,6 +65,10 @@ const Product_detail = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const body = document.querySelector("body");
   const orderbtnClick = (e) => {
+    if (!isLoggedIn) {
+      goToLogin();
+      return;
+    }
     setIsOrderBtnClicked(true);
     setOrderBtn(e.target.dataset.orderbtn);
     setScrollPosition(window.pageYOffset);
