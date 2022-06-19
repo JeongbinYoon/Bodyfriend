@@ -1,0 +1,137 @@
+@values font-mRegular, font-mExtraLarge, font-mMedium from '../../common/size.css';
+@values color-grey, color-white, color-ivory, line-grey, color-brown, gradient-brown from '../../common/colors.css';
+
+.mypage {
+  padding-bottom: 30px;
+  background-color: color-ivory;
+  font-size: font-mMedium;
+}
+.userInfo {
+  padding: 20px;
+  background: gradient-brown;
+}
+
+.userName {
+  font-size: font-mExtraLarge;
+  font-weight: 700;
+}
+
+/* userInfo */
+.userInfo .container {
+  padding: 15px;
+  background-color: color-white;
+}
+
+.userInfo .container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid line-grey;
+  box-sizing: border-box;
+}
+
+.userInfo .container > div:first-child {
+  padding-top: 0;
+}
+
+.userInfo .container > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.userInfo .container > div > div {
+  display: flex;
+  align-items: center;
+}
+
+.timeVal {
+  color: color-brown;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.coupon,
+.using {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+}
+
+.coupon {
+  padding-right: 15px;
+  border-right: 1px solid line-grey;
+}
+
+.using {
+  padding-left: 15px;
+}
+
+.couponCount,
+.usingCount {
+  font-size: font-mExtraLarge;
+  font-weight: 700;
+}
+
+/* Delivery */
+.delivery {
+  margin-bottom: 10px;
+  padding: 20px;
+  background-color: color-white;
+}
+
+.delivery .title {
+  display: flex;
+  justify-content: space-between;
+  font-size: font-mMedium;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.deliveryStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+  background-color: color-ivory;
+  border: 1px solid line-grey;
+}
+
+.deliveryStatus .status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: font-mRegular;
+}
+
+.deliveryStatus .status > span:first-child {
+  color: color-grey;
+  font-size: font-mExtraLarge;
+  font-weight: 700;
+}
+
+/* List */
+.myList ul {
+  margin-bottom: 10px;
+  padding: 0 20px;
+  background-color: color-white;
+  font-weight: 700;
+}
+
+.myList ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid line-grey;
+}
+
+.myList ul li:last-child {
+  border: none;
+}
+
+.myList .listTitle {
+  font-weight: 400;
+  padding-bottom: 0;
+  border: none;
+}

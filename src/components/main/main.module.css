@@ -1,4 +1,4 @@
-@value font-mExtraLarge, font-btn from '../../common/size.css';
+@value font-mExtraLarge, font-mMedium, font-btn from '../../common/size.css';
 @value color-darkBlack, color-grey, color-ivory, line-grey, color-brown from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
@@ -42,5 +42,26 @@
   .logInBtn .nextIcon {
     font-size: font-mExtraLarge;
     color: color-brown;
+  }
+
+  .userInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid line-grey;
+    font-size: font-mMedium;
+  }
+
+  .userName {
+    font-size: font-mExtraLarge;
+    font-weight: 700;
+  }
+
+  .timeVal {
+    color: color-brown;
+    font-size: 24px;
+    font-weight: 700;
   }
 }

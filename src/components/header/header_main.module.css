@@ -1,4 +1,4 @@
-@value color-darkBlack from '../../common/colors.css';
+@value color-white, color-darkBlack from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -14,6 +14,8 @@
     height: 46px;
     margin-top: 24px;
     background-color: color-darkBlack;
+    color: color-white;
+    position: relative;
   }
 
   .title {
@@ -24,5 +26,13 @@
   .title img {
     width: 115px;
     filter: brightness(5);
+  }
+
+  .myPageIcon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
   }
 }

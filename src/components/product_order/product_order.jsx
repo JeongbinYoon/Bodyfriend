@@ -240,14 +240,14 @@ const Product_order = ({ authService }) => {
                       <span className={styles.itemPrice}>
                         <span className={styles.price}>
                           {item.price.toLocaleString()}
-                        </span>{" "}
+                        </span>
                         원
                       </span>
                     ) : (
                       <span className={styles.itemPrice}>
                         <span className={styles.price}>
                           {item.rentPrice.toLocaleString()}
-                        </span>{" "}
+                        </span>
                         원 / 월
                       </span>
                     )}
