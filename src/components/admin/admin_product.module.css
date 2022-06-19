@@ -1,0 +1,77 @@
+@values color-grey, line-grey from '../../common/colors.css';
+@values font-mTiny, font-mMedium, radius-small from '../../common/size.css';
+
+/* PC (해상도 1024px)*/
+@media all and (min-width: 1024px) {
+}
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .productTable,
+  .productTable td,
+  .productTable th {
+    border: 1px solid #f00;
+    box-sizing: border-box;
+  }
+  .productTable .hide {
+    display: block;
+  }
+}
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .productTable,
+  .productTable td,
+  .productTable th {
+    /* border: 1px solid #f00; */
+    box-sizing: border-box;
+  }
+
+  .productTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .productTable thead {
+    color: color-grey;
+    font-size: font-mTiny;
+  }
+
+  .productTable tbody {
+    text-align: center;
+    font-size: font-mMedium;
+    border-bottom: 1px solid line-grey;
+  }
+
+  .productTable tbody .deletBtn button {
+    background-color: transparent;
+    border: none;
+  }
+
+  .productTable tbody .name {
+    padding-left: 5px;
+    text-align: left;
+  }
+
+  .productTable tbody tr {
+    height: 50px;
+  }
+
+  .productTable .hide {
+    display: none;
+  }
+
+  .productContainer .btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+
+  .productContainer .btns .nextBtn,
+  .productContainer .btns .prevBtn {
+    width: 50px;
+    height: 30px;
+    margin-left: 5px;
+    background-color: color-light-grey;
+    border-radius: radius-small;
+    border: 1px solid line-grey;
+  }
+}
