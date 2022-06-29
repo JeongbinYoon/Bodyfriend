@@ -83,30 +83,63 @@ const Admin_prodcut = ({ userId }) => {
   }, []);
 
   // 이미지 선택
-  const fileInput = useRef();
+  const fileInput1 = useRef();
+  const fileInput2 = useRef();
   const [fileName, setFileName] = useState();
-  const [attachment, setAttachment] = useState("");
+  const [attachment1, setAttachment1] = useState("");
+  const [attachment2, setAttachment2] = useState("");
+  const fileArr = [];
+  const imgArr = [];
   const onFileChange = (e) => {
     const {
       target: { files },
     } = e;
     const theFile = files[0];
     setFileName(theFile.name.split(".")[0]);
+    console.log(theFile);
 
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
       const {
         currentTarget: { result },
       } = finishedEvent;
-      setAttachment(result);
+      setAttachment1(result);
     };
     reader.readAsDataURL(theFile);
   };
 
+  const onDetailFilesChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const theFile = files;
+    console.log(theFile);
+    // setFileName(theFile.name.split(".")[0]);
+
+    [...theFile].map((file) => {
+      console.log(file);
+      const reader = new FileReader();
+      reader.onloadend = (finishedEvent) => {
+        const {
+          currentTarget: { result },
+        } = finishedEvent;
+        fileArr.push(result);
+        setAttachment2(fileArr);
+        console.log(fileArr);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
   // 파일 미리보기 지우기
-  const onClearAttachment = () => {
-    setAttachment("");
-    fileInput.current.value = null;
+  const onClearAttachment = (e) => {
+    if (e.target.className === "clear1Btn") {
+      setAttachment1("");
+      fileInput1.current.value = null;
+    } else if (e.target.className === "clear2Btn") {
+      setAttachment2("");
+      fileInput2.current.value = null;
+    }
   };
 
   // Submit
@@ -117,26 +150,26 @@ const Admin_prodcut = ({ userId }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let attachmentURL = "";
+    let attachment1URL = "";
     // 사진이 있는 경우 Storage에 등록
-    if (attachment !== "") {
-      const attachmentRef = ref(
+    if (attachment1 !== "") {
+      const attachment1Ref = ref(
         storageService,
         `product/${itemNameRef.current.value}`
       );
       const response = await uploadString(
-        attachmentRef,
-        attachment,
+        attachment1Ref,
+        attachment1,
         "data_url"
       );
-      attachmentURL = await getDownloadURL(response.ref);
+      attachment1URL = await getDownloadURL(response.ref);
     }
 
     const item = {
       name: itemNameRef.current.value,
       price: Number(itemPriceRef.current.value),
       rentPrice: Number(itemRentPriceRef.current.value),
-      imgURL: attachmentURL,
+      imgURL: attachment1URL,
     };
 
     // db 업로드
@@ -212,15 +245,34 @@ const Admin_prodcut = ({ userId }) => {
         <input ref={itemPriceRef} type="number" placeholder="가격" />
         <input ref={itemRentPriceRef} type="number" placeholder="렌트가" />
         <input
-          ref={fileInput}
+          ref={fileInput1}
           onChange={onFileChange}
           type="file"
           accept="image/*"
         />
-        {attachment && (
+        {attachment1 && (
           <div>
-            <img src={attachment} alt="" width="50px" height="50px" />
-            <button onClick={onClearAttachment}>Clear</button>
+            <img src={attachment1} alt="#" width="50px" height="50px" />
+            <button className="clear1Btn" onClick={onClearAttachment}>
+              Clear
+            </button>
+          </div>
+        )}
+        <input
+          ref={fileInput2}
+          onChange={onDetailFilesChange}
+          type="file"
+          accept="image/*"
+          multiple
+        />
+        {attachment2 && (
+          <div>
+            {attachment2.map((file) => (
+              <img src={file} alt="#" width="50px" height="50px" />
+            ))}
+            <button className="clear2Btn" onClick={onClearAttachment}>
+              Clear
+            </button>
           </div>
         )}
         <input type="submit" value="등록" />
