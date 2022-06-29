@@ -3,6 +3,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_detail.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { dbService, storageService } from "../../service/firebase";
+import {
+  collection,
+  addDoc,
+  orderBy,
+  limit,
+  startAt,
+  startAfter,
+  endAt,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import {
   faStore,
   faAngleRight,
@@ -33,7 +45,6 @@ const Product_detail = ({ authService }) => {
   const [tabName, setTabName] = useState("detail");
   const location = useLocation();
   const item = location.state.item.item;
-  console.log(item);
 
   // 탭 메뉴 클릭
   const tabClicked = (e) => {
@@ -185,12 +196,16 @@ const Product_detail = ({ authService }) => {
           <div className={styles.detail}>
             <div ref={detailImgBox} className={styles.detailImgBox}>
               <div className={styles.detailImgs}>
-                <img
-                  className={styles.detailImg01}
-                  src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_01.jpg"
-                  alt=""
-                />
-                <img
+                {item.detailImgURL.map((img) => (
+                  <img
+                    key={img}
+                    className={styles.detailImg01}
+                    src={img}
+                    alt=""
+                  />
+                ))}
+
+                {/* <img
                   className={styles.detailImg02}
                   src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_02.jpg"
                   alt=""
@@ -204,7 +219,7 @@ const Product_detail = ({ authService }) => {
                   className={styles.detailImg04}
                   src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_04.jpg"
                   alt=""
-                />
+                /> */}
               </div>
             </div>
             <div className={styles.moreBtn}>

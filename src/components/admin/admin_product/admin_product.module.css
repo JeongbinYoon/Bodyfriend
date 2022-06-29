@@ -1,4 +1,4 @@
-@values color-grey, line-grey from '../../../common/colors.css';
+@values color-white, shadow-grey, color-grey, line-grey from '../../../common/colors.css';
 @values font-mTiny, font-mMedium, radius-small from '../../../common/size.css';
 
 /* PC (해상도 1024px)*/
@@ -73,5 +73,52 @@
     background-color: color-light-grey;
     border-radius: radius-small;
     border: 1px solid line-grey;
+  }
+
+  /* 제품 등록 Form */
+  /* .addProductForm {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    background-color: color-white;
+    box-shadow: 0px 1px 3px shadow-grey;
+    border-radius: radius-small;
+    box-sizing: border-box;
+  } */
+
+  .addProductForm > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .addProductForm > div > label {
+    flex-basis: 20%;
+    font-size: font-mMedium;
+  }
+
+  .addProductForm > div > input {
+    flex-basis: 80%;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid line-grey;
+  }
+
+  .addProductForm > div.selectMainImg {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .selectImgLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    min-height: 50px;
+    margin-top: 10px;
+    border: 1px solid line-grey;
+  }
+  .selectImg {
+    display: none;
   }
 }

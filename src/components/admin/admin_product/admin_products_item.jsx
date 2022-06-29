@@ -29,6 +29,11 @@ const Admin_products_item = ({ item }) => {
       if (item.item.imgURL !== "") {
         await deleteObject(ref(storageService, item.item.imgURL));
       }
+      if (item.item.detailImgURL.length > 0) {
+        for (let i = 0; i < item.item.detailImgURL.length; i++) {
+          await deleteObject(ref(storageService, item.item.detailImgURL[i]));
+        }
+      }
     }
   };
 

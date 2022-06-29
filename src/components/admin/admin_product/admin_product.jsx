@@ -82,21 +82,19 @@ const Admin_prodcut = ({ userId }) => {
     getChairs();
   }, []);
 
-  // 이미지 선택
+  // 이미지 선택 미리보기
   const fileInput1 = useRef();
   const fileInput2 = useRef();
   const [fileName, setFileName] = useState();
   const [attachment1, setAttachment1] = useState("");
   const [attachment2, setAttachment2] = useState("");
   const fileArr = [];
-  const imgArr = [];
   const onFileChange = (e) => {
     const {
       target: { files },
     } = e;
     const theFile = files[0];
     setFileName(theFile.name.split(".")[0]);
-    console.log(theFile);
 
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
@@ -108,16 +106,15 @@ const Admin_prodcut = ({ userId }) => {
     reader.readAsDataURL(theFile);
   };
 
+  // 상제정보 이미지 다중 선택 미리보기
   const onDetailFilesChange = (e) => {
     const {
       target: { files },
     } = e;
     const theFile = files;
-    console.log(theFile);
     // setFileName(theFile.name.split(".")[0]);
 
     [...theFile].map((file) => {
-      console.log(file);
       const reader = new FileReader();
       reader.onloadend = (finishedEvent) => {
         const {
@@ -125,7 +122,6 @@ const Admin_prodcut = ({ userId }) => {
         } = finishedEvent;
         fileArr.push(result);
         setAttachment2(fileArr);
-        console.log(fileArr);
       };
       reader.readAsDataURL(file);
     });
@@ -151,11 +147,13 @@ const Admin_prodcut = ({ userId }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     let attachment1URL = "";
+    let attachment2URL = "";
+    let attachment2URLArr = [];
     // 사진이 있는 경우 Storage에 등록
     if (attachment1 !== "") {
       const attachment1Ref = ref(
         storageService,
-        `product/${itemNameRef.current.value}`
+        `product/${itemNameRef.current.value}/${itemNameRef.current.value}`
       );
       const response = await uploadString(
         attachment1Ref,
@@ -165,11 +163,28 @@ const Admin_prodcut = ({ userId }) => {
       attachment1URL = await getDownloadURL(response.ref);
     }
 
+    if (attachment2.length > 0) {
+      for (let i = 0; i < attachment2.length; i++) {
+        const attachment2Ref = ref(
+          storageService,
+          `product/${itemNameRef.current.value}/${itemNameRef.current.value} 상세이미지${i}`
+        );
+        const response = await uploadString(
+          attachment2Ref,
+          attachment2[i],
+          "data_url"
+        );
+        attachment2URL = await getDownloadURL(response.ref);
+        attachment2URLArr.push(attachment2URL);
+      }
+    }
+
     const item = {
       name: itemNameRef.current.value,
       price: Number(itemPriceRef.current.value),
       rentPrice: Number(itemRentPriceRef.current.value),
       imgURL: attachment1URL,
+      detailImgURL: attachment2URLArr,
     };
 
     // db 업로드
@@ -180,7 +195,8 @@ const Admin_prodcut = ({ userId }) => {
     });
 
     // input 초기화
-    onClearAttachment();
+    setAttachment1("");
+    setAttachment2("");
     const inputList = formRef.current.childNodes;
     [...inputList].map((input) => {
       if (input.type !== "submit") {
@@ -240,43 +256,104 @@ const Admin_prodcut = ({ userId }) => {
           </div>
         </div>
       </section>
-      <form ref={formRef} onSubmit={onSubmit}>
-        <input ref={itemNameRef} type="text" placeholder="제품명" />
-        <input ref={itemPriceRef} type="number" placeholder="가격" />
-        <input ref={itemRentPriceRef} type="number" placeholder="렌트가" />
-        <input
-          ref={fileInput1}
-          onChange={onFileChange}
-          type="file"
-          accept="image/*"
-        />
-        {attachment1 && (
-          <div>
-            <img src={attachment1} alt="#" width="50px" height="50px" />
-            <button className="clear1Btn" onClick={onClearAttachment}>
-              Clear
-            </button>
-          </div>
-        )}
-        <input
-          ref={fileInput2}
-          onChange={onDetailFilesChange}
-          type="file"
-          accept="image/*"
-          multiple
-        />
-        {attachment2 && (
-          <div>
-            {attachment2.map((file) => (
-              <img src={file} alt="#" width="50px" height="50px" />
-            ))}
-            <button className="clear2Btn" onClick={onClearAttachment}>
-              Clear
-            </button>
-          </div>
-        )}
-        <input type="submit" value="등록" />
-      </form>
+
+      <section className={adminStyles.section}>
+        <div className={adminStyles.sectionHeader}>
+          <h2 className={adminStyles.sectionTitle}>제품 등록하기</h2>
+        </div>
+        <div className={adminStyles.sectionBody}>
+          <form
+            className={styles.addProductForm}
+            ref={formRef}
+            onSubmit={onSubmit}
+          >
+            <div>
+              <label htmlFor="name">제품명: </label>
+              <input
+                ref={itemNameRef}
+                type="text"
+                placeholder="제품명"
+                id="name"
+              />
+            </div>
+            <div>
+              <label htmlFor="price">가격: </label>
+              <input
+                ref={itemPriceRef}
+                type="number"
+                placeholder="가격"
+                id="price"
+              />
+            </div>
+            <div>
+              <label htmlFor="rentPrice">렌탈가: </label>
+              <input
+                ref={itemRentPriceRef}
+                type="number"
+                placeholder="렌탈가"
+                id="rentPrice"
+              />
+            </div>
+
+            {/* 이미지 선택 */}
+            <div className={styles.selectMainImg}>
+              <p>메인 이미지</p>
+              <>
+                <label className={styles.selectImgLabel} htmlFor="selectImg">
+                  +
+                </label>
+                <input
+                  id="selectImg"
+                  className={styles.selectImg}
+                  ref={fileInput1}
+                  onChange={onFileChange}
+                  type="file"
+                  accept="image/*"
+                />
+              </>
+            </div>
+
+            {attachment1 && (
+              <div>
+                <img src={attachment1} alt="#" width="50px" height="50px" />
+                <button className="clear1Btn" onClick={onClearAttachment}>
+                  Clear
+                </button>
+              </div>
+            )}
+
+            <div className={styles.selectMainImg}>
+              <p>상세 이미지</p>
+              <>
+                <label className={styles.selectImgLabel} htmlFor="selectImg2">
+                  +
+                </label>
+                <input
+                  ref={fileInput2}
+                  id="selectImg2"
+                  className={styles.selectImg}
+                  onChange={onDetailFilesChange}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                />
+              </>
+            </div>
+
+            {attachment2 && (
+              <div>
+                {attachment2.map((file) => (
+                  <img src={file} alt="#" width="50px" height="50px" />
+                ))}
+                <button className="clear2Btn" onClick={onClearAttachment}>
+                  Clear
+                </button>
+              </div>
+            )}
+            <input type="submit" value="등록" />
+          </form>
+        </div>
+      </section>
     </>
   );
 };
