@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { dbService, storageService } from "../../../service/firebase";
 import {
   collection,
@@ -15,6 +16,8 @@ import { ref, uploadString, getDownloadURL } from "@firebase/storage";
 import adminStyles from "../admin.module.css";
 import styles from "./admin_product.module.css";
 import Admin_products_item from "./admin_products_item";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 const Admin_prodcut = ({ userId }) => {
   // 의자 데이터 로드
@@ -205,6 +208,32 @@ const Admin_prodcut = ({ userId }) => {
     });
   };
 
+  // 색상 Input 추가
+  const [inputs, setInputs] = useState([]);
+  const colorRef = useRef();
+  const addInput = (e) => {
+    e.preventDefault();
+    const newInputs = [];
+    newInputs.push(
+      <div id={inputs.length} key={newInputs.length} className={styles.color}>
+        <input type="text" />
+        <button onClick={minusInput} className={styles.colorDeleteBtn}>
+          <FontAwesomeIcon icon={faMinus} />
+        </button>
+      </div>
+    );
+    setInputs([...inputs, newInputs]);
+    console.log(inputs);
+  };
+
+  // 색상 Input 제거
+  const minusInput = (e) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    // console.log(inputs);
+  }, [inputs]);
   // console.log(chairs);
   return (
     <>
@@ -350,6 +379,16 @@ const Admin_prodcut = ({ userId }) => {
                 </button>
               </div>
             )}
+            <div className={styles.colorSelect}>
+              <p>색상: </p>
+              <div ref={colorRef} className={styles.color}>
+                <input type="text" />
+                <button onClick={addInput} className={styles.colorMoreBtn}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              </div>
+              {inputs.map((input) => input)}
+            </div>
             <input type="submit" value="등록" />
           </form>
         </div>
