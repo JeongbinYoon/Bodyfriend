@@ -146,6 +146,16 @@ const Admin_prodcut = ({ userId }) => {
   const itemNameRef = useRef();
   const itemPriceRef = useRef();
   const itemRentPriceRef = useRef();
+  const colorMoreRef = useRef();
+  const [color, setColor] = useState();
+  const [colorMore, setColorMore] = useState("");
+  const colorInputChange = (e) => {
+    setColor(e.target.value);
+  };
+
+  const colorMoreChange = (e) => {
+    setColorMore(colorMoreRef.current.value);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -182,12 +192,19 @@ const Admin_prodcut = ({ userId }) => {
       }
     }
 
+    // 색상 추가
+    const colors = [color];
+    if (colorMore.length > 0) {
+      colors.push(colorMore);
+    }
+
     const item = {
       name: itemNameRef.current.value,
       price: Number(itemPriceRef.current.value),
       rentPrice: Number(itemRentPriceRef.current.value),
       imgURL: attachment1URL,
       detailImgURL: attachment2URLArr,
+      colors,
     };
 
     // db 업로드
@@ -206,17 +223,24 @@ const Admin_prodcut = ({ userId }) => {
         input.value = null;
       }
     });
-  };
+  }; // Submit 끝
 
   // 색상 Input 추가
+  const [addCount, setAddCount] = useState(0);
   const [inputs, setInputs] = useState([]);
   const colorRef = useRef();
   const addInput = (e) => {
     e.preventDefault();
+    setAddCount(1);
+    if (addCount === 1) return;
     const newInputs = [];
     newInputs.push(
-      <div id={inputs.length} key={newInputs.length} className={styles.color}>
-        <input type="text" />
+      <div
+        id={inputs.length + 1}
+        key={newInputs.length}
+        className={styles.color}
+      >
+        <input ref={colorMoreRef} onChange={colorMoreChange} type="text" />
         <button onClick={minusInput} className={styles.colorDeleteBtn}>
           <FontAwesomeIcon icon={faMinus} />
         </button>
@@ -229,11 +253,10 @@ const Admin_prodcut = ({ userId }) => {
   // 색상 Input 제거
   const minusInput = (e) => {
     e.preventDefault();
+    setInputs([]);
+    setAddCount(0);
   };
 
-  useEffect(() => {
-    // console.log(inputs);
-  }, [inputs]);
   // console.log(chairs);
   return (
     <>
@@ -372,7 +395,13 @@ const Admin_prodcut = ({ userId }) => {
             {attachment2 && (
               <div>
                 {attachment2.map((file) => (
-                  <img src={file} alt="#" width="50px" height="50px" />
+                  <img
+                    key={file}
+                    src={file}
+                    alt="#"
+                    width="50px"
+                    height="50px"
+                  />
                 ))}
                 <button className="clear2Btn" onClick={onClearAttachment}>
                   Clear
@@ -381,8 +410,8 @@ const Admin_prodcut = ({ userId }) => {
             )}
             <div className={styles.colorSelect}>
               <p>색상: </p>
-              <div ref={colorRef} className={styles.color}>
-                <input type="text" />
+              <div id="0" ref={colorRef} className={styles.color}>
+                <input onChange={colorInputChange} type="text" />
                 <button onClick={addInput} className={styles.colorMoreBtn}>
                   <FontAwesomeIcon icon={faPlus} />
                 </button>
