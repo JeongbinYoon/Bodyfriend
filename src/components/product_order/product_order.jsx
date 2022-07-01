@@ -4,6 +4,10 @@ import Header from "../header/header";
 import styles from "./product_order.module.css";
 import { dbService } from "../../service/firebase";
 import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
   collection,
   addDoc,
   orderBy,
@@ -101,7 +105,7 @@ const Product_order = ({ authService }) => {
   const timeRef = useRef();
   const [address, setAddress] = useState();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     console.log(address);
     // 유효성 검사
@@ -125,21 +129,23 @@ const Product_order = ({ authService }) => {
         return;
       }
     }
+    console.log(timeRef);
 
     const order = {
+      orderUser: nameRef.current.value,
       type,
       color,
       count,
-      // time: timeRef.current.value,
-      OrderdAt: Date.now(),
+      orderedAt: Date.now(),
     };
+
     const userInfo = {
       userId,
       name: nameRef.current.value,
       number: numberRef.current.value,
       mail: userMail,
     };
-    console.log(address);
+    console.log(userId);
 
     if (type === "rent") {
       Object.assign(order, { time: timeRef.current.value });
@@ -147,12 +153,21 @@ const Product_order = ({ authService }) => {
       address && Object.assign(userInfo, { address });
     }
 
-    // db 업로드
-    addDoc(collection(dbService, "order"), {
+    // 주문 정보 업로드 (order)
+    await addDoc(collection(dbService, "order"), {
       item,
       order,
       userInfo,
     });
+
+    const docRef = doc(dbService, "users", userId);
+
+    // 사용자 정보 업데이트 (주문 상품, 주문 정보)
+    await updateDoc(docRef, {
+      "orderedItem.item": item,
+      order,
+    });
+
     setIsSubmitted(true);
   };
 

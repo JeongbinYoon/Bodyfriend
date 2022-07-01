@@ -10,6 +10,8 @@ import {
   faFacebookF,
 } from "@fortawesome/free-brands-svg-icons";
 import Alert_findUser from "./alert/alert_findUser";
+import { dbService } from "../../service/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Login = ({ authService }) => {
   const emailInput = useRef();
@@ -39,6 +41,7 @@ const Login = ({ authService }) => {
       .then((data) => {
         console.log(data);
         let name = data.user.email.split("@")[0];
+        setUserData(data);
         goToHome(data.user.uid, name, data.user.photoURL);
       });
   };
@@ -49,6 +52,7 @@ const Login = ({ authService }) => {
       .login(event.currentTarget.dataset.snstype)
       .then((data) => {
         console.log(data);
+        setUserData(data);
         goToHome(data.user.uid, data.user.displayName, data.user.photoURL);
       });
   };
@@ -58,6 +62,42 @@ const Login = ({ authService }) => {
   //     user && goToHome(user.uid);
   //   });
   // });
+
+  const setUserData = async (data) => {
+    const order = {
+      orderUser: null,
+      type: null,
+      color: null,
+      count: null,
+      orderedAt: null,
+    };
+
+    const orderedItem = {
+      item: null,
+    };
+    const userInfo = {
+      userId: data.user.uid,
+      name: data.user.displayName,
+      mail: data.user.email,
+      number: data.user.phoneNumber,
+    };
+    console.log(data);
+    console.log({ userInfo });
+    const userDocRef = doc(dbService, "users", data.user.uid);
+    const docSnap = await getDoc(userDocRef);
+    console.log(docSnap);
+
+    if (docSnap.exists() && docSnap.id !== null) {
+      console.log("데이터 존재");
+      return;
+    } else {
+      await setDoc(doc(dbService, "users", data.user.uid), {
+        userInfo,
+        order,
+        orderedItem,
+      });
+    }
+  };
 
   return (
     <>
