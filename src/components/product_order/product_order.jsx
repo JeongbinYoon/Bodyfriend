@@ -48,7 +48,9 @@ const Product_order = ({ authService }) => {
   let color = location.state.color;
   let count = location.state.count;
   let type = location.state.orderBtn;
-
+  const userName = location.state.userInfo.name;
+  const userNumber = location.state.userInfo.number;
+  console.log(location.state);
   // 토글
   const [isClicked, setIsClicked] = useState(false);
   const toggle = (e) => {
@@ -210,12 +212,18 @@ const Product_order = ({ authService }) => {
       <form onSubmit={onSubmit}>
         <div className={styles.userInfo}>
           <label htmlFor="userName">이름</label>
-          <input ref={nameRef} type="text" placeholder="이름입력" />
+          <input
+            ref={nameRef}
+            type="text"
+            placeholder="이름 입력"
+            value={userName}
+          />
           <label htmlFor="userNumber">휴대폰 번호</label>
           <input
             ref={numberRef}
             type="number"
             placeholder="- 없이 숫자만 입력"
+            value={userNumber}
           />
           {type === "buy" ? <Postcode onAddress={handleAddress} /> : null}
         </div>

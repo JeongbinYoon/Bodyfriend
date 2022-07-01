@@ -25,15 +25,21 @@
     margin-top: 30px;
   }
 
+  .login_name,
+  .login_number,
   .login_id,
   .login_pw {
     position: relative;
   }
 
-  .login_pw {
-    margin-top: 10px;
+  .login_name,
+  .login_number,
+  .login_id {
+    margin-bottom: 10px;
   }
 
+  .login_number .number_icon,
+  .login_name .name_icon,
   .login_id .id_icon,
   .login_pw .pw_icon {
     height: font-mExtraLarge;

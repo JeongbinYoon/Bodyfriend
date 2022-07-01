@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./main.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import HeaderMain from "../header/header_main";
 import Main_friendmall from "./main_friendmall";
 import Banner from "../banner/banner";
+import { dbService } from "../../service/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Main = ({ authService }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState("");
+  const [userInfo, setUserInfo] = useState("");
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserInfo(userData.userInfo);
+  }, [userData]);
 
   const onLogout = () => {
     console.log("로그아웃");
@@ -20,16 +29,19 @@ const Main = ({ authService }) => {
     authService.onAuthChange((user) => {
       if (user) {
         setLoggedIn(true);
-        if (user.displayName) {
-          setUserName(user.displayName);
-        } else {
-          setUserName(user.email.split("@")[0]);
-        }
+        setUserId(user.uid);
+        getUserData(user);
       } else {
         setLoggedIn(false);
       }
     });
-  });
+  }, []);
+
+  const getUserData = async (user) => {
+    const userDocRef = doc(dbService, "users", user.uid);
+    const docSnap = await getDoc(userDocRef);
+    docSnap && setUserData(docSnap.data());
+  };
 
   return (
     <>
@@ -58,7 +70,10 @@ const Main = ({ authService }) => {
           <>
             <div className={styles.userInfo}>
               <span>
-                <span className={styles.userName}>{userName}</span>님
+                <span className={styles.userName}>
+                  {userInfo && userInfo.name}
+                </span>
+                님
               </span>
               <span className={styles.time}>
                 사용시간 <span className={styles.timeVal}>0</span>분
@@ -75,7 +90,7 @@ const Main = ({ authService }) => {
           </>
         )}
         <Banner />
-        <Main_friendmall />
+        <Main_friendmall userInfo={userInfo} />
       </div>
     </>
   );

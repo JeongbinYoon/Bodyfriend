@@ -45,6 +45,7 @@ const Product_detail = ({ authService }) => {
   const [tabName, setTabName] = useState("detail");
   const location = useLocation();
   const item = location.state.item.item;
+  const userInfo = location.state.userInfo;
 
   // 탭 메뉴 클릭
   const tabClicked = (e) => {
@@ -132,6 +133,7 @@ const Product_detail = ({ authService }) => {
         color,
         count,
         orderBtn,
+        userInfo,
       },
     });
   };

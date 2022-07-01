@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../../service/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
-const Main_friendmall = () => {
+const Main_friendmall = ({ userInfo }) => {
   //파이어베이스 스토리지 이미지 가져오기
   //   // Create a reference to the file we want to download
   //   const storage = getStorage();
@@ -62,6 +62,7 @@ const Main_friendmall = () => {
     navigate("/product/productDetail", {
       state: {
         item,
+        userInfo,
       },
     });
   };
