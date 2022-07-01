@@ -57,44 +57,25 @@ const Login = ({ authService }) => {
       });
   };
 
-  // useEffect(() => {
-  //   authService.onAuthChange((user) => {
-  //     user && goToHome(user.uid);
-  //   });
-  // });
-
+  // 로그인 시 사용자 데이터 등록
   const setUserData = async (data) => {
-    const order = {
-      orderUser: null,
-      type: null,
-      color: null,
-      count: null,
-      orderedAt: null,
-    };
-
-    const orderedItem = {
-      item: null,
-    };
     const userInfo = {
       userId: data.user.uid,
       name: data.user.displayName,
       mail: data.user.email,
       number: data.user.phoneNumber,
     };
-    console.log(data);
-    console.log({ userInfo });
     const userDocRef = doc(dbService, "users", data.user.uid);
     const docSnap = await getDoc(userDocRef);
-    console.log(docSnap);
 
+    // 등록된 사용자일 경우 초기값 지정 X
     if (docSnap.exists() && docSnap.id !== null) {
       console.log("데이터 존재");
       return;
     } else {
       await setDoc(doc(dbService, "users", data.user.uid), {
         userInfo,
-        order,
-        orderedItem,
+        orderList: [],
       });
     }
   };

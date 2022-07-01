@@ -129,10 +129,11 @@ const Product_order = ({ authService }) => {
         return;
       }
     }
-    console.log(timeRef);
 
+    // DB 업로드 데이터
     const order = {
-      orderUser: nameRef.current.value,
+      item,
+      orderName: nameRef.current.value,
       type,
       color,
       count,
@@ -155,17 +156,18 @@ const Product_order = ({ authService }) => {
 
     // 주문 정보 업로드 (order)
     await addDoc(collection(dbService, "order"), {
-      item,
       order,
       userInfo,
     });
 
-    const docRef = doc(dbService, "users", userId);
-
     // 사용자 정보 업데이트 (주문 상품, 주문 정보)
+    const docRef = doc(dbService, "users", userId);
+    const docSnap = await getDoc(docRef);
+    let orderList = [];
+    orderList = docSnap.data().orderList;
+    orderList.push(order);
     await updateDoc(docRef, {
-      "orderedItem.item": item,
-      order,
+      orderList,
     });
 
     setIsSubmitted(true);
