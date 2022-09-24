@@ -17,6 +17,7 @@ const Main = ({ authService }) => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
+    console.log(userData);
     setUserInfo(userData.userInfo);
   }, [userData]);
 

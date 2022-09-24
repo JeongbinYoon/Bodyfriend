@@ -1,61 +1,9 @@
-.banner {
-  overflow: hidden;
+.slider {
+  width: 360px;
 }
 
 .imgBox {
   display: flex;
-  height: 150px;
-  background-color: lightgrey;
-  animation: 20s slideBanner 1s infinite ease-out;
-}
-
-.img1 {
-  min-width: 100%;
-  height: 150px;
-  background-color: cornflowerblue;
-}
-
-.img2 {
-  min-width: 100%;
-  height: 150px;
-  background-color: firebrick;
-}
-
-.img3 {
-  min-width: 100%;
-  height: 150px;
-  background-color: salmon;
-}
-
-.img4 {
-  min-width: 100%;
-  height: 150px;
-  background-color: darkslategray;
-}
-
-.img5 {
-  min-width: 100%;
-  height: 150px;
-  background-color: fuchsia;
-}
-
-@keyframes slideBanner {
-  15% {
-    transform: translateX(0);
-  }
-
-  20%,
-  40% {
-    transform: translateX(-100%);
-  }
-
-  45%,
-  65% {
-    transform: translateX(-200%);
-  }
-
-  70%,
-  100% {
-    transform: translateX(-300%);
-  }
+  max-height: 130px;
+  overflow: hidden;
 }

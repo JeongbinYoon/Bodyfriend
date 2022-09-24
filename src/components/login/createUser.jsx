@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faEnvelope,
+  faPhone,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
 import { dbService } from "../../service/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -67,30 +72,32 @@ const CreateUser = ({ authService }) => {
   };
 
   return (
-    <div className={styles.login}>
+    <>
       <Header title={"회원가입"} />
-      <form>
-        <div className={styles.login_name}>
-          <input ref={nameInput} type="text" placeholder="이름" />
-          <FontAwesomeIcon className={styles.name_icon} icon={faEnvelope} />
-        </div>
-        <div className={styles.login_number}>
-          <input ref={numberInput} type="number" placeholder="전화번호" />
-          <FontAwesomeIcon className={styles.number_icon} icon={faEnvelope} />
-        </div>
-        <div className={styles.login_id}>
-          <input ref={emailInput} type="email" placeholder="아이디" />
-          <FontAwesomeIcon className={styles.id_icon} icon={faEnvelope} />
-        </div>
-        <div className={styles.login_pw}>
-          <input ref={pwInput} type="password" placeholder="비밀번호" />
-          <FontAwesomeIcon className={styles.pw_icon} icon={faLock} />
-        </div>
-        <button onClick={onEmailCreate} className={styles.loginBtn}>
-          가입하기
-        </button>
-      </form>
-    </div>
+      <div className={styles.login}>
+        <form>
+          <div className={styles.login_name}>
+            <input ref={nameInput} type="text" placeholder="이름" />
+            <FontAwesomeIcon className={styles.name_icon} icon={faUser} />
+          </div>
+          <div className={styles.login_number}>
+            <input ref={numberInput} type="number" placeholder="전화번호" />
+            <FontAwesomeIcon className={styles.number_icon} icon={faPhone} />
+          </div>
+          <div className={styles.login_id}>
+            <input ref={emailInput} type="email" placeholder="이메일" />
+            <FontAwesomeIcon className={styles.id_icon} icon={faEnvelope} />
+          </div>
+          <div className={styles.login_pw}>
+            <input ref={pwInput} type="password" placeholder="비밀번호" />
+            <FontAwesomeIcon className={styles.pw_icon} icon={faLock} />
+          </div>
+          <button onClick={onEmailCreate} className={styles.loginBtn}>
+            가입하기
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

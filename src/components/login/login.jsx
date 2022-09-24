@@ -51,7 +51,6 @@ const Login = ({ authService }) => {
     authService //
       .login(event.currentTarget.dataset.snstype)
       .then((data) => {
-        console.log(data);
         setUserData(data);
         goToHome(data.user.uid, data.user.displayName, data.user.photoURL);
       });
