@@ -26,6 +26,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Alert from "./alert/alert";
 import Postcode from "../product_detail/postcode";
+import { requestPaymentFn } from "../../service/payment";
 
 const Product_order = ({ authService }) => {
   const [userId, setUserId] = useState("");
@@ -130,6 +131,28 @@ const Product_order = ({ authService }) => {
         setIsAlert(true);
         return;
       }
+    }
+
+    if (type === "buy") {
+      await requestPaymentFn({
+        price: item.price,
+        order_name: item.name,
+        order_id: "asdasdasdsadasdsas",
+        user: {
+          id: userId,
+          username: nameRef.current.value,
+          phone: numberRef.current.value,
+          email: userMail,
+        },
+        items: [
+          {
+            id: "dddddddddddd",
+            name: item.name,
+            qty: count,
+            price: item.price,
+          },
+        ],
+      });
     }
 
     // DB 업로드 데이터

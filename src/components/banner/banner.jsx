@@ -30,6 +30,27 @@ const Banner = () => {
           alt="배너2"
         />
       </div>
+      <div className="imgBox">
+        <img
+          className={styles.img2}
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          alt="배너2"
+        />
+      </div>
+      <div className="imgBox">
+        <img
+          className={styles.img2}
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          alt="배너2"
+        />
+      </div>
+      <div className="imgBox">
+        <img
+          className={styles.img2}
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          alt="배너2"
+        />
+      </div>
     </Slider>
   );
 };

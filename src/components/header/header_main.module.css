@@ -10,9 +10,9 @@
 @media all and (max-width: 767px) {
   .header {
     display: flex;
-    justify-content: center;
+    align-items: center;
     height: 46px;
-    margin-top: 24px;
+    /* margin-top: 24px; */
     background-color: color-darkBlack;
     color: color-white;
     position: relative;
@@ -20,6 +20,9 @@
 
   .title {
     margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
   }
 
@@ -28,11 +31,21 @@
     filter: brightness(5);
   }
 
+  .headerIcon {
+    display: flex;
+    margin-left: auto;
+    margin-right: 15px;
+  }
+
+  .logoutBtn {
+    background-color: transparent;
+    border: none;
+    color: color-white;
+    font-size: 16px;
+    margin-right: 5px;
+  }
+
   .myPageIcon {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
     cursor: pointer;
   }
 }

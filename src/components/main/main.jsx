@@ -21,11 +21,6 @@ const Main = ({ authService }) => {
     setUserInfo(userData.userInfo);
   }, [userData]);
 
-  const onLogout = () => {
-    console.log("로그아웃");
-    authService.logout();
-  };
-
   useEffect(() => {
     authService.onAuthChange((user) => {
       if (user) {
@@ -45,9 +40,9 @@ const Main = ({ authService }) => {
   };
 
   return (
-    <>
+    <div className={styles.main}>
       <HeaderMain authService={authService} />
-      <div className={styles.main}>
+      <div>
         {!isLoggedIn && (
           <div className={styles.logInContainer}>
             <Link to="/login">
@@ -80,20 +75,13 @@ const Main = ({ authService }) => {
                 사용시간 <span className={styles.timeVal}>0</span>분
               </span>
             </div>
-            <button
-              onClick={() => {
-                onLogout();
-                setLoggedIn(true);
-              }}
-            >
-              Logout
-            </button>
           </>
         )}
         <Banner />
         <Main_friendmall userInfo={userInfo} />
+        <Main_friendmall userInfo={userInfo} />
       </div>
-    </>
+    </div>
   );
 };
 

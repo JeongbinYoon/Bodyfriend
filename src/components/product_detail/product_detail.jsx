@@ -206,22 +206,6 @@ const Product_detail = ({ authService }) => {
                     alt=""
                   />
                 ))}
-
-                {/* <img
-                  className={styles.detailImg02}
-                  src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_02.jpg"
-                  alt=""
-                />
-                <img
-                  className={styles.detailImg03}
-                  src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_03.jpg"
-                  alt=""
-                />
-                <img
-                  className={styles.detailImg04}
-                  src="https://bodyfriend.speedgabia.com/01_BODYFRIEND/01_PRODUCT/atlan/m_1080/atlan_m_1080_04.jpg"
-                  alt=""
-                /> */}
               </div>
             </div>
             <div className={styles.moreBtn}>
