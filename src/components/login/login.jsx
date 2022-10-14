@@ -34,7 +34,7 @@ const Login = ({ authService }) => {
     });
   };
 
-  // alert
+  // 로그인 에러 알림
   const [isAlert, setIsAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const handleCheckAlert = (bool) => {
@@ -53,7 +53,7 @@ const Login = ({ authService }) => {
         goToHome(data.user.uid, name, data.user.photoURL);
       })
       // 에러처리: auth_service에서 던진 에러
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error.message);
         setAlertMessage(error.message);
         setIsAlert(true);

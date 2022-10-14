@@ -15,10 +15,7 @@ class AuthService {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(function () {
-        console.log("로그인 성공");
-      })
-      .catch(function (error) {
+      .catch((error) => {
         const errorCode = error.code;
         console.log(errorCode);
         switch (errorCode) {
@@ -28,20 +25,33 @@ class AuthService {
             throw new Error("유효하지 않은 이메일 형식입니다.");
           }
           case "auth/internal-error": {
-            throw new Error("값을 모두 입력하세요.");
+            throw new Error("비밀번호를 입력하세요.");
           }
           case "auth/wrong-password": {
             throw new Error("비밀번호가 틀렸습니다.");
           }
           default:
-            throw new Error("로그인 에러. 잠시 후 다시 이용하세요.");
+            throw new Error("로그인 에러. 문의(043-1234-1234)");
         }
       });
   }
 
   emailCreate(email, password) {
     console.log(`생성 ${(email, password)}`);
-    return firebase.auth().createUserWithEmailAndPassword(email, password);
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        switch (errorCode) {
+          case "auth/email-already-in-use": {
+            throw new Error("이미 가입된 계정입니다.");
+          }
+          default:
+            throw new Error("회원가입 에러, 문의(043-1234-1234)");
+        }
+      });
   }
 
   resetEmail(email) {
@@ -49,11 +59,11 @@ class AuthService {
     return firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(function () {
+      .then(() => {
         // Password reset email sent.
         console.log("email 전송");
       })
-      .catch(function (error) {
+      .catch((error) => {
         // Error occurred. Inspect error.code.
       });
   }
