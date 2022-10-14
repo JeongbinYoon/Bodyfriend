@@ -12,7 +12,7 @@ import Product_order from "./components/product_order/product_order";
 function App({ authService }) {
   return (
     <div className={styles.app}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route exact path="/" element={<Main authService={authService} />} />
           <Route

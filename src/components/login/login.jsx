@@ -12,6 +12,7 @@ import {
 import Alert_findUser from "./alert/alert_findUser";
 import { dbService } from "../../service/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Alert from "../../common/alert/alert";
 
 const Login = ({ authService }) => {
   const emailInput = useRef();
@@ -33,6 +34,13 @@ const Login = ({ authService }) => {
     });
   };
 
+  // alert
+  const [isAlert, setIsAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const handleCheckAlert = (bool) => {
+    setIsAlert(false);
+  };
+
   // 이메일 로그인
   const onEmailLogin = (event) => {
     event.preventDefault();
@@ -43,6 +51,12 @@ const Login = ({ authService }) => {
         let name = data.user.email.split("@")[0];
         setUserData(data);
         goToHome(data.user.uid, name, data.user.photoURL);
+      })
+      // 에러처리: auth_service에서 던진 에러
+      .catch(function (error) {
+        console.log(error.message);
+        setAlertMessage(error.message);
+        setIsAlert(true);
       });
   };
 
@@ -132,6 +146,14 @@ const Login = ({ authService }) => {
           />
         )}
       </div>
+      {isAlert && (
+        <Alert
+          onCheckAlert={handleCheckAlert}
+          title="알림"
+          content={alertMessage}
+          btnName="확인"
+        />
+      )}
     </>
   );
 };

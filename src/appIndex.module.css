@@ -1,0 +1,6 @@
+.appIndex {
+  width: 360px;
+  max-height: 740px;
+  overflow: auto;
+  margin: 0 auto;
+}
