@@ -207,6 +207,7 @@ const Product_detail = ({ authService }) => {
           <div className={styles.detail}>
             <div ref={detailImgBox} className={styles.detailImgBox}>
               <div className={styles.detailImgs}>
+                {console.log(item)}
                 {item.detailImgURL.map((img) => (
                   <img
                     key={img}

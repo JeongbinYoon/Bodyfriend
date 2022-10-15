@@ -78,8 +78,8 @@ const Main = ({ authService }) => {
           </>
         )}
         <Banner />
-        <Main_friendmall userInfo={userInfo} />
-        <Main_friendmall userInfo={userInfo} />
+        <Main_friendmall userInfo={userInfo} item="chair" />
+        <Main_friendmall userInfo={userInfo} item="waterPurifier" />
       </div>
     </div>
   );

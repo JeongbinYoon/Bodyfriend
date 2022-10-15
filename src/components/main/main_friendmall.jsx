@@ -5,55 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../../service/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
-const Main_friendmall = ({ userInfo }) => {
-  //파이어베이스 스토리지 이미지 가져오기
-  //   // Create a reference to the file we want to download
-  //   const storage = getStorage();
-  //   const starsRef = ref(storage, "images/jb.png");
-
-  //   // Get the download URL
-  //   getDownloadURL(starsRef)
-  //     .then((url) => {
-  //       // Insert url into an <img> tag to "download"
-  //     })
-  //     .catch((error) => {
-  //       // A full list of error codes is available at
-  //       // https://firebase.google.com/docs/storage/web/handle-errors
-  //       switch (error.code) {
-  //         case "storage/object-not-found":
-  //           // File doesn't exist
-  //           break;
-  //         case "storage/unauthorized":
-  //           // User doesn't have permission to access the object
-  //           break;
-  //         case "storage/canceled":
-  //           // User canceled the upload
-  //           break;
-
-  //         // ...
-
-  //         case "storage/unknown":
-  //           // Unknown error occurred, inspect the server response
-  //           break;
-  //       }
-  //     });
-
+const Main_friendmall = ({ userInfo, item }) => {
   // 의자 데이터 로드
-  const [chairs, setChairs] = useState("");
-  const getChairs = async () => {
-    const q = query(collection(dbService, "chair"));
+  const [products, setProducts] = useState("");
+  const getProducts = async () => {
+    const q = query(collection(dbService, item));
     onSnapshot(q, (snapshot) => {
-      const chairArr = snapshot.docs.map((doc) => ({
+      const productArr = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
-      setChairs(chairArr);
+      setProducts(productArr);
     });
   };
 
   useEffect(() => {
-    getChairs();
+    getProducts();
   }, []);
 
   // 상세 페이지 이동
@@ -67,19 +34,26 @@ const Main_friendmall = ({ userInfo }) => {
     });
   };
 
-  // console.log(chairs);
   return (
     <>
-      {chairs && (
+      {products && (
         <>
           <div className={styles.titleContianer}>
-            <h2 className={styles.title}>프랜드몰</h2>
-            <p>10년 더 건강하게 바디프랜드</p>
+            <h2 className={styles.title}>
+              {item === "chair"
+                ? "안마의자"
+                : item === "waterPurifier" && "W정수기"}
+            </h2>
+            <p>
+              {item === "chair"
+                ? "10년 더 건강하게 바디프랜드"
+                : item === "waterPurifier" && "예쁜 물, 더 스마트하게!"}
+            </p>
             <button>더보기+</button>
           </div>
           <div className={styles.itemsContainer}>
             <ul className={styles.items}>
-              {chairs.map((chair) => (
+              {products.map((chair) => (
                 <li
                   onClick={() => {
                     goToProductDetail(chair);

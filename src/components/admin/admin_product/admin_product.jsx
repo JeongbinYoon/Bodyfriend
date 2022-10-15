@@ -143,6 +143,7 @@ const Admin_prodcut = ({ userId }) => {
 
   // Submit
   const formRef = useRef();
+  const selectRef = useRef();
   const itemNameRef = useRef();
   const itemPriceRef = useRef();
   const itemRentPriceRef = useRef();
@@ -157,7 +158,7 @@ const Admin_prodcut = ({ userId }) => {
     setColorMore(colorMoreRef.current.value);
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let attachment1URL = "";
     let attachment2URL = "";
@@ -208,11 +209,26 @@ const Admin_prodcut = ({ userId }) => {
     };
 
     // db 업로드
-    await addDoc(collection(dbService, "chair"), {
-      item,
-      createdAt: Date.now(),
-      creatorId: userId,
-    });
+    const productType = [...selectRef.current.childNodes].filter(
+      (el) => el.tagName === "INPUT" && el.checked
+    )[0].value;
+
+    if (productType == "선택") {
+      console.log("다시 선택");
+      return;
+    } else if (productType === "안마의자") {
+      await addDoc(collection(dbService, "chair"), {
+        item,
+        createdAt: Date.now(),
+        creatorId: userId,
+      });
+    } else if (productType === "정수기") {
+      await addDoc(collection(dbService, "waterPurifier"), {
+        item,
+        createdAt: Date.now(),
+        creatorId: userId,
+      });
+    }
 
     // input 초기화
     setAttachment1("");
@@ -317,8 +333,28 @@ const Admin_prodcut = ({ userId }) => {
           <form
             className={styles.addProductForm}
             ref={formRef}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
           >
+            <div className="radioBtn" ref={selectRef}>
+              <input
+                type="radio"
+                value="선택"
+                id="select"
+                name="product"
+                checked
+              />
+              <label htmlFor="select">선택</label>
+              <input type="radio" value="안마의자" id="chair" name="product" />
+              <label htmlFor="chair">안마의자</label>
+
+              <input
+                type="radio"
+                value="정수기"
+                id="waterPurifier"
+                name="product"
+              />
+              <label htmlFor="waterPurifier">정수기</label>
+            </div>
             <div>
               <label htmlFor="name">제품명: </label>
               <input
