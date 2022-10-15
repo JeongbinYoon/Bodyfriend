@@ -23,6 +23,7 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import Alert from "../../common/alert/alert";
 
 const Product_detail = ({ authService }) => {
   // 로그인 여부
@@ -37,9 +38,17 @@ const Product_detail = ({ authService }) => {
     });
   });
 
+  // 로그인 필요 알림
+  const [isAlert, setIsAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const handleCheckAlert = (bool) => {
+    setIsAlert(false);
+  };
   // 로그인 페이지 이동
   const goToLogin = () => {
-    navigate("/login");
+    setAlertMessage("로그인이 필요합니다.");
+    setIsAlert(true);
+    // navigate("/login");
   };
 
   const [tabName, setTabName] = useState("detail");
@@ -360,6 +369,15 @@ const Product_detail = ({ authService }) => {
           </div>
         </>
       ) : null}
+      {isAlert && (
+        <Alert
+          onCheckAlert={handleCheckAlert}
+          title="알림"
+          content={alertMessage}
+          btnName="확인"
+          path="/login"
+        />
+      )}
     </div>
   );
 };

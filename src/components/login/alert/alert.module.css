@@ -1,84 +1,74 @@
 @value font-mMedium, radius-small, font-btn from '../../../common/size.css';
-@value color-black, color-darkBlack, color-white, color-grey, line-grey, color-gold from '../../../common/colors.css';
+@value color-black, color-darkBlack, color-white, color-grey, line-grey, gradient-brown from '../../../common/colors.css';
 
-/* PC (해상도 1024px)*/
-@media all and (min-width: 1024px) {
+.alert {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100vh;
+  margin-left: -20px;
+  position: fixed;
 }
-/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
-@media all and (min-width: 768px) and (max-width: 1023px) {
+.bg {
+  width: 100vw;
+  height: 100vh;
+  margin-left: -20px;
+  background-color: color-black;
+  opacity: 80%;
 }
-/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (max-width: 767px) {
-  .alert {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    height: 100vh;
-    margin-left: -20px;
-    position: fixed;
-  }
-  .bg {
-    width: 100vw;
-    height: 100vh;
-    margin-left: -20px;
-    background-color: color-black;
-    opacity: 80%;
-  }
 
-  .alertBox {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    top: 20%;
-    width: calc(100% - 70px);
-    height: 200px;
-    color: color-darkBlack;
-    background-color: color-white;
-    border-radius: radius-small;
-  }
+.alertBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 20%;
+  width: calc(100% - 70px);
+  height: 200px;
+  color: color-darkBlack;
+  background-color: color-white;
+  border-radius: radius-small;
+}
 
-  .alertBox header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    padding: 0 15px;
-    border-bottom: 1px solid line-grey;
-  }
+.alertBox header {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 15px;
+  border-bottom: 1px solid line-grey;
+}
 
-  .alertBox header h2 {
-    font-size: font-mMedium;
-  }
+.alertBox header h2 {
+  font-size: font-mMedium;
+}
 
-  .alertBox .body {
-    padding: 15px;
-  }
+.alertBox .body {
+  padding: 15px;
+}
 
-  .alertBox .body input {
-    padding: 0 15px;
-    font-size: font-mMedium;
-  }
+.alertBox .body input {
+  padding: 0 15px;
+  font-size: font-mMedium;
+}
 
-  .alertBox footer {
-    display: flex;
-  }
+.alertBox footer {
+  display: flex;
+}
 
-  .alertBox footer button {
-    /* flex-basis: 1; */
-    flex-grow: 1;
-    height: 50px;
-    border: none;
-    color: color-white;
-    font-size: font-btn;
-  }
+.alertBox footer button {
+  flex-grow: 1;
+  height: 50px;
+  border: none;
+  color: color-white;
+  font-size: font-btn;
+}
 
-  .alertBox footer .findBtn {
-    background-color: color-gold;
-    border-radius: 0 0 0 radius-small;
-  }
+.alertBox footer .findBtn {
+  background: gradient-brown;
+  border-radius: 0 0 0 radius-small;
+}
 
-  .alertBox footer .cancleBtn {
-    background-color: color-grey;
-    border-radius: 0 0 radius-small 0;
-  }
+.alertBox footer .cancleBtn {
+  background-color: color-grey;
+  border-radius: 0 0 radius-small 0;
 }
