@@ -1,15 +1,15 @@
 import styles from "./main_friendmall.module.css";
 import React, { useState, useEffect } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { dbService } from "../../service/firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
-const Main_friendmall = ({ userInfo, item }) => {
-  // 의자 데이터 로드
+const Main_friendmall = ({ userInfo, type }) => {
+  // 상품 데이터 로드
   const [products, setProducts] = useState("");
   const getProducts = async () => {
-    const q = query(collection(dbService, item));
+    const q = query(collection(dbService, type));
     onSnapshot(q, (snapshot) => {
       const productArr = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -40,16 +40,18 @@ const Main_friendmall = ({ userInfo, item }) => {
         <>
           <div className={styles.titleContianer}>
             <h2 className={styles.title}>
-              {item === "chair"
+              {type === "chair"
                 ? "안마의자"
-                : item === "waterPurifier" && "W정수기"}
+                : type === "waterPurifier" && "W정수기"}
             </h2>
             <p>
-              {item === "chair"
+              {type === "chair"
                 ? "10년 더 건강하게 바디프랜드"
-                : item === "waterPurifier" && "예쁜 물, 더 스마트하게!"}
+                : type === "waterPurifier" && "예쁜 물, 더 스마트하게!"}
             </p>
-            <button>더보기+</button>
+            <Link to="/product/productLists" state={{ type }}>
+              <button>더보기+</button>
+            </Link>
           </div>
           <div className={styles.itemsContainer}>
             <ul className={styles.items}>

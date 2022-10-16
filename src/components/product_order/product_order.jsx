@@ -3,21 +3,7 @@ import { useLocation } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_order.module.css";
 import { dbService } from "../../service/firebase";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  collection,
-  addDoc,
-  orderBy,
-  limit,
-  startAt,
-  startAfter,
-  endAt,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, addDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
@@ -28,7 +14,7 @@ import Alert from "./alert/alert";
 import Postcode from "../product_detail/postcode";
 import { requestPaymentFn } from "../../service/payment";
 
-const Product_order = ({ authService }) => {
+const ProductOrder = ({ authService }) => {
   const [userId, setUserId] = useState("");
   const [userMail, setUserMail] = useState("");
   useEffect(() => {
@@ -414,4 +400,4 @@ const Product_order = ({ authService }) => {
   );
 };
 
-export default Product_order;
+export default ProductOrder;

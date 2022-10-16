@@ -3,18 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_detail.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { dbService, storageService } from "../../service/firebase";
-import {
-  collection,
-  addDoc,
-  orderBy,
-  limit,
-  startAt,
-  startAfter,
-  endAt,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
 import {
   faStore,
   faAngleRight,
@@ -25,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Alert from "../../common/alert/alert";
 
-const Product_detail = ({ authService }) => {
+const ProductDetail = ({ authService }) => {
   // 로그인 여부
   const [isLoggedIn, setIsLoggedIn] = useState();
   useEffect(() => {
@@ -383,4 +371,4 @@ const Product_detail = ({ authService }) => {
   );
 };
 
-export default Product_detail;
+export default ProductDetail;

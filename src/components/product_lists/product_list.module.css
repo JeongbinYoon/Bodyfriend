@@ -1,0 +1,73 @@
+@value font-title, font-mMedium, font-mSmall, font-btn from '../../common/size.css';
+@value color-darkBlack, color-grey from '../../common/colors.css';
+
+.bgImg {
+  height: 150px;
+  overflow: hidden;
+}
+
+.bgImg img {
+  width: 100%;
+}
+
+.itemsContainer {
+  padding-top: 50px;
+  /* width: 100%; */
+  /* overflow: scroll; */
+}
+.itemsContainer::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.items .item {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 5px);
+  margin-bottom: 35px;
+}
+
+.item .imgbox {
+  overflow: hidden;
+}
+
+.item .img {
+  width: 100%;
+}
+
+.item h3,
+p {
+  margin: 0;
+}
+
+.item .name {
+  font-size: font-mMedium;
+  font-weight: 400;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.itemInfo {
+  margin-top: auto;
+}
+
+.item p {
+  font-size: font-mLarge;
+  font-weight: 600;
+}
+
+.item p span:nth-child(1) {
+  font-size: font-mSmall;
+  margin-bottom: 5px;
+}
+
+.item p span:nth-child(2) {
+  color: color-grey;
+  font-size: font-mSmall;
+}
