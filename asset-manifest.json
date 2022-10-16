@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Bodyfriend/static/css/main.bb54fdad.css",
-    "main.js": "/Bodyfriend/static/js/main.e341009d.js",
+    "main.css": "/Bodyfriend/static/css/main.91e9af78.css",
+    "main.js": "/Bodyfriend/static/js/main.10b77b00.js",
     "static/media/slick.svg": "/Bodyfriend/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/Bodyfriend/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/Bodyfriend/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/Bodyfriend/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/Bodyfriend/index.html",
-    "main.bb54fdad.css.map": "/Bodyfriend/static/css/main.bb54fdad.css.map",
-    "main.e341009d.js.map": "/Bodyfriend/static/js/main.e341009d.js.map"
+    "main.91e9af78.css.map": "/Bodyfriend/static/css/main.91e9af78.css.map",
+    "main.10b77b00.js.map": "/Bodyfriend/static/js/main.10b77b00.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb54fdad.css",
-    "static/js/main.e341009d.js"
+    "static/css/main.91e9af78.css",
+    "static/js/main.10b77b00.js"
   ]
 }
