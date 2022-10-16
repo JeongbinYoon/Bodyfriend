@@ -3,6 +3,7 @@ import Header from "../header/header";
 import styles from "./mypage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Mypage = ({ authService }) => {
   const [userName, setUserName] = useState("");
@@ -45,10 +46,12 @@ const Mypage = ({ authService }) => {
       </div>
 
       <div className={styles.delivery}>
-        <div className={styles.title}>
-          <span>주문/배송조회</span>
-          <FontAwesomeIcon className={styles.nextIcon} icon={faAngleRight} />
-        </div>
+        <Link to="/myorder">
+          <div className={styles.title}>
+            <span>주문/배송조회</span>
+            <FontAwesomeIcon className={styles.nextIcon} icon={faAngleRight} />
+          </div>
+        </Link>
         <div className={styles.deliveryStatus}>
           <div className={styles.status}>
             <span>0</span>

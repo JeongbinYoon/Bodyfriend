@@ -53,30 +53,30 @@ const Main_friendmall = ({ userInfo, item }) => {
           </div>
           <div className={styles.itemsContainer}>
             <ul className={styles.items}>
-              {products.map((chair) => (
+              {products.map((product) => (
                 <li
                   onClick={() => {
-                    goToProductDetail(chair);
+                    goToProductDetail(product);
                   }}
                   className={styles.item}
-                  key={chair.id}
+                  key={product.id}
                 >
                   <div className={styles.imgbox}>
                     <img
                       className={styles.img}
-                      src={chair.item.imgURL}
+                      src={product.item.imgURL}
                       alt=""
                     />
                   </div>
-                  <h3 className={styles.name}>{chair.item.name}</h3>
+                  <h3 className={styles.name}>{product.item.name}</h3>
                   <div className={styles.itemInfo}>
                     <p>
-                      {chair.item.price.toLocaleString()}
+                      {product.item.price.toLocaleString()}
                       <span> 원</span>
                       <span> / 구매가</span>
                     </p>
                     <p>
-                      {chair.item.rentPrice.toLocaleString()}
+                      {product.item.rentPrice.toLocaleString()}
                       <span> 원</span>
                       <span> / 렌탈가(월)</span>
                     </p>

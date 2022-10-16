@@ -5,6 +5,7 @@ import Admin_order from "./components/admin/admin_order/admin_order";
 import CreateUser from "./components/login/createUser";
 import Login from "./components/login/login";
 import Main from "./components/main/main";
+import MyOrder from "./components/mypage/myorder/myorder";
 import Mypage from "./components/mypage/mypage";
 import Product_detail from "./components/product_detail/product_detail";
 import Product_order from "./components/product_order/product_order";
@@ -22,11 +23,6 @@ function App({ authService }) {
           />
           <Route
             exact
-            path="/mypage"
-            element={<Mypage authService={authService} />}
-          />
-          <Route
-            exact
             path="/createUser"
             element={<CreateUser authService={authService} />}
           />
@@ -40,6 +36,18 @@ function App({ authService }) {
             path="/product/productOrder"
             element={<Product_order authService={authService} />}
           />
+
+          <Route
+            exact
+            path="/mypage"
+            element={<Mypage authService={authService} />}
+          />
+          <Route
+            exact
+            path="/myorder"
+            element={<MyOrder authService={authService} />}
+          />
+
           <Route
             exact
             path="/admin"

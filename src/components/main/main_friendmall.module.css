@@ -1,98 +1,89 @@
 @value font-title, font-mMedium, font-mSmall, font-btn from '../../common/size.css';
 @value color-darkBlack, color-grey from '../../common/colors.css';
 
-/* PC (해상도 1024px)*/
-@media all and (min-width: 1024px) {
+.titleContianer {
+  margin-top: 35px;
+  padding: 20px;
+  position: relative;
 }
-/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
-@media all and (min-width: 768px) and (max-width: 1023px) {
+.titleContianer .title {
+  margin: 0;
+  font-size: font-title;
+  font-weight: 900;
 }
-/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
-@media all and (max-width: 767px) {
-  .titleContianer {
-    margin-top: 35px;
-    padding: 20px;
-    position: relative;
-  }
-  .titleContianer .title {
-    margin: 0;
-    font-size: font-title;
-    font-weight: 900;
-  }
 
-  .titleContianer p {
-    margin-top: 5px;
-    color: color-grey;
-    font-size: font-mMedium;
-    font-weight: 700;
-  }
+.titleContianer p {
+  margin-top: 5px;
+  color: color-grey;
+  font-size: font-mMedium;
+  font-weight: 700;
+}
 
-  .titleContianer button {
-    border: none;
-    color: color-grey;
-    font-size: font-mMedium;
-    background-color: transparent;
-    position: absolute;
-    right: 20px;
-    top: 25px;
-  }
+.titleContianer button {
+  border: none;
+  color: color-grey;
+  font-size: font-mMedium;
+  background-color: transparent;
+  position: absolute;
+  right: 20px;
+  top: 25px;
+}
 
-  .itemsContainer {
-    width: 100%;
-    overflow: scroll;
-  }
-  .itemsContainer::-webkit-scrollbar {
-    display: none;
-    width: 0 !important;
-  }
-  .items {
-    display: flex;
-    width: fit-content;
-    margin: 0 10px;
-  }
+.itemsContainer {
+  width: 100%;
+  overflow: scroll;
+}
+.itemsContainer::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
+.items {
+  display: flex;
+  width: fit-content;
+  margin: 0 10px;
+}
 
-  .items .item {
-    display: flex;
-    flex-direction: column;
-    width: 115px;
-    height: 220px;
-    margin: 0 10px;
-  }
+.items .item {
+  display: flex;
+  flex-direction: column;
+  width: 115px;
+  height: 220px;
+  margin: 0 10px;
+}
 
-  .item .imgbox {
-    height: 115px;
-  }
+.item .imgbox {
+  height: 115px;
+}
 
-  .item .img {
-    width: 100%;
-  }
+.item .img {
+  width: 100%;
+}
 
-  .item h3,
-  p {
-    margin: 0;
-  }
+.item h3,
+p {
+  margin: 0;
+}
 
-  .item .name {
-    font-size: font-mMedium;
-    margin-top: 15px;
-  }
+.item .name {
+  font-size: font-mMedium;
+  margin-top: 15px;
+}
 
-  .itemInfo {
-    margin-top: auto;
-  }
+.itemInfo {
+  margin-top: auto;
+}
 
-  .item p {
-    font-size: font-mLarge;
-    font-weight: 700;
-  }
+.item p {
+  font-size: font-mLarge;
+  font-weight: 700;
+}
 
-  .item p span:nth-child(1) {
-    font-size: font-mSmall;
-    margin-bottom: 5px;
-  }
+.item p span:nth-child(1) {
+  font-size: font-mSmall;
+  margin-bottom: 5px;
+}
 
-  .item p span:nth-child(2) {
-    color: color-grey;
-    font-size: font-mSmall;
-  }
+.item p span:nth-child(2) {
+  color: color-grey;
+  font-size: font-mSmall;
 }
