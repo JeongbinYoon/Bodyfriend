@@ -9,14 +9,13 @@
 .titleContianer .title {
   margin: 0;
   font-size: font-title;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .titleContianer p {
   margin-top: 5px;
   color: color-grey;
   font-size: font-mMedium;
-  font-weight: 700;
 }
 
 .titleContianer button {
@@ -47,7 +46,7 @@
   display: flex;
   flex-direction: column;
   width: 115px;
-  height: 220px;
+  height: 210px;
   margin: 0 10px;
 }
 
@@ -66,7 +65,8 @@ p {
 
 .item .name {
   font-size: font-mMedium;
-  margin-top: 15px;
+  font-weight: 400;
+  margin-top: 5px;
 }
 
 .itemInfo {
@@ -75,7 +75,7 @@ p {
 
 .item p {
   font-size: font-mLarge;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .item p span:nth-child(1) {

@@ -1,9 +1,17 @@
 .slider {
-  width: 360px;
+  width: 100%;
 }
 
 .imgBox {
   display: flex;
-  max-height: 130px;
+  height: 130px;
   overflow: hidden;
+  position: relative;
+}
+
+.imgBox img {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }

@@ -16,38 +16,31 @@ const Banner = () => {
   };
   return (
     <Slider {...settings} className={styles.slider}>
-      <div className="imgBox">
+      <div className={styles.imgBox}>
         <img
           className={styles.img1}
-          src="https://www.bodyfriend.co.kr/upload/bbs/banner/daef820bd96249b58e2ddc26d88fdb2f.jpg"
+          src="https://m.bodyfriend.co.kr/img/content/img_chair_02.png"
           alt="배너1"
         />
       </div>
-      <div className="imgBox">
+      <div className={styles.imgBox}>
         <img
           className={styles.img2}
-          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          src="https://m.bodyfriend.co.kr/img/content/img_chair_05.png"
           alt="배너2"
         />
       </div>
-      <div className="imgBox">
+      <div className={styles.imgBox}>
         <img
           className={styles.img2}
-          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          src="https://m.bodyfriend.co.kr/img/content/img_chair_04.png"
           alt="배너2"
         />
       </div>
-      <div className="imgBox">
+      <div className={styles.imgBox}>
         <img
           className={styles.img2}
-          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
-          alt="배너2"
-        />
-      </div>
-      <div className="imgBox">
-        <img
-          className={styles.img2}
-          src="https://www.bodyfriend.co.kr/upload/bbs/banner/876d9c69c6e84bfeb47e8ba08b2350e6.jpg"
+          src="https://m.bodyfriend.co.kr/img/content/img_chair_01.png"
           alt="배너2"
         />
       </div>
