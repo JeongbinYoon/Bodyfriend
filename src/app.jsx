@@ -10,6 +10,7 @@ import Mypage from "./components/mypage/mypage";
 import ProductDetail from "./components/product_detail/product_detail";
 import ProductOrder from "./components/product_order/product_order";
 import ProductLists from "./components/product_lists/product_lists";
+import FindStore from "./components/findStore/findStore";
 
 function App({ authService }) {
   return (
@@ -54,6 +55,8 @@ function App({ authService }) {
             path="/myorder"
             element={<MyOrder authService={authService} />}
           />
+
+          <Route exact path="/branchStore" element={<FindStore />} />
 
           <Route
             exact

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "../header/header";
 import styles from "./product_detail.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -156,19 +156,21 @@ const ProductDetail = ({ authService }) => {
         </p>
       </div>
 
-      <div className={styles.findStore}>
-        <div className={styles.store_bg}>
-          <div className={styles.storeIcon}>
-            <FontAwesomeIcon icon={faStore} />
-            <div className={styles.iconLight}></div>
+      <Link to="/branchStore">
+        <div className={styles.findStore}>
+          <div className={styles.store_bg}>
+            <div className={styles.storeIcon}>
+              <FontAwesomeIcon icon={faStore} />
+              <div className={styles.iconLight}></div>
+            </div>
+            <div className={styles.txts}>
+              <p>가까운 전시장 찾기</p>
+              <p>이 제품을 직접 체험해 보시려면?</p>
+            </div>
+            <FontAwesomeIcon className={styles.nextIcon} icon={faAngleRight} />
           </div>
-          <div className={styles.txts}>
-            <p>가까운 전시장 찾기</p>
-            <p>이 제품을 직접 체험해 보시려면?</p>
-          </div>
-          <FontAwesomeIcon className={styles.nextIcon} icon={faAngleRight} />
         </div>
-      </div>
+      </Link>
 
       <div className={styles.infoTabContainer}>
         <ul className={styles.infoTab}>
