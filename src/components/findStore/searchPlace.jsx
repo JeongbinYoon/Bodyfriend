@@ -5,9 +5,14 @@ import MapContainer from "./mapContainer";
 import styles from "./findStore.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 const SearchPlace = () => {
   const [inputText, setInputText] = useState("");
   const [place, setPlace] = useState("");
+
+  useEffect(() => {
+    setPlace("서울 바디프랜드");
+  }, []);
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -15,7 +20,7 @@ const SearchPlace = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPlace(inputText);
+    setPlace(`${inputText} 바디프랜드`);
     setInputText("");
   };
 
@@ -25,7 +30,7 @@ const SearchPlace = () => {
         <FontAwesomeIcon icon={faSearch} className={styles.searchBtn1} />
         <input
           className={styles.searchPlaceInput}
-          placeholder="전시장 검색"
+          placeholder="검색 지역 입력"
           onChange={onChange}
           value={inputText}
         />
