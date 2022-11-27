@@ -11,12 +11,14 @@ import ProductDetail from "./components/product_detail/product_detail";
 import ProductOrder from "./components/product_order/product_order";
 import ProductLists from "./components/product_lists/product_lists";
 import FindStore from "./components/findStore/findStore";
+import Introduce from "./components/introduce/introduce";
 
 function App({ authService }) {
   return (
     <div className={styles.app}>
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
+          <Route path="/introduce" element={<Introduce />} />
           <Route exact path="/" element={<Main authService={authService} />} />
           <Route
             exact
