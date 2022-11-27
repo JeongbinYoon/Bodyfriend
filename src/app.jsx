@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import styles from "./app.module.css";
 import Admin from "./components/admin/admin";
 import Admin_order from "./components/admin/admin_order/admin_order";
@@ -16,7 +16,8 @@ import Introduce from "./components/introduce/introduce";
 function App({ authService }) {
   return (
     <div className={styles.app}>
-      <Router basename={process.env.PUBLIC_URL}>
+      {/* <Router basename={process.env.PUBLIC_URL}> */}
+      <Router>
         <Routes>
           <Route path="/introduce" element={<Introduce />} />
           <Route exact path="/" element={<Main authService={authService} />} />
