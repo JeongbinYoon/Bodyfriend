@@ -18,30 +18,26 @@ const Banner = () => {
     <Slider {...settings} className={styles.slider}>
       <div className={styles.imgBox}>
         <img
-          className={styles.img1}
-          src="https://m.bodyfriend.co.kr/img/content/img_chair_02.png"
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/fe9768ac912141cca1c312698ff5646a.jpg"
           alt="배너1"
         />
       </div>
       <div className={styles.imgBox}>
         <img
-          className={styles.img2}
-          src="https://m.bodyfriend.co.kr/img/content/img_chair_05.png"
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/8c7df9f00f094c878cf777f8458b5f44.jpg"
           alt="배너2"
         />
       </div>
       <div className={styles.imgBox}>
         <img
-          className={styles.img2}
-          src="https://m.bodyfriend.co.kr/img/content/img_chair_04.png"
-          alt="배너2"
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/1522d9d3733e4c6c9ab39775a66e8da9.jpg"
+          alt="배너3"
         />
       </div>
       <div className={styles.imgBox}>
         <img
-          className={styles.img2}
-          src="https://m.bodyfriend.co.kr/img/content/img_chair_01.png"
-          alt="배너2"
+          src="https://www.bodyfriend.co.kr/upload/bbs/banner/792ff58c487a45d0808aa49cbda2b039.jpg"
+          alt="배너4"
         />
       </div>
     </Slider>

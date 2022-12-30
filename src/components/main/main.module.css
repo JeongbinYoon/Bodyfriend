@@ -12,9 +12,14 @@
   .main {
     -ms-overflow-style: none;
   }
+
   .main::-webkit-scrollbar {
     display: none;
     width: 0 !important;
+  }
+
+  .section {
+    padding-bottom: 50px;
   }
 
   .logInContainer {

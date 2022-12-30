@@ -42,7 +42,7 @@ const Main = ({ authService }) => {
   return (
     <div className={styles.main}>
       <HeaderMain authService={authService} />
-      <div>
+      <div className={styles.section}>
         {!isLoggedIn && (
           <div className={styles.logInContainer}>
             <Link to="/login">

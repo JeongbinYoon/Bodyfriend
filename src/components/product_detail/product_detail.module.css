@@ -1,5 +1,5 @@
 @value font-btn, font-mSmall, font-mRegular, font-mMedium, font-mLarge, font-mExtraLarge, font-btn from '../../common/size.css';
-@value color-white, color-ivory, color-light-brown, color-brown, gradient-brown, color-gold, color-grey, color-black, line-grey from '../../common/colors.css';
+@value color-darkBlack, color-white, color-ivory, color-light-brown, color-brown, gradient-brown, color-gold, color-grey, color-black, line-grey from '../../common/colors.css';
 
 /* PC (해상도 1024px)*/
 @media all and (min-width: 1024px) {
@@ -235,6 +235,7 @@
   }
 
   .orderBtns .buyBtn {
+    color: color-darkBlack;
     border-top: 1px solid line-grey;
   }
   .orderBtns .rentBtn {
