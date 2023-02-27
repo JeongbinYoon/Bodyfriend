@@ -71,7 +71,7 @@ const ProductDetail = ({ authService }) => {
   // 주문 버튼 클릭
   const [isOrderBtnClicked, setIsOrderBtnClicked] = useState(false);
   const [orderBtn, setOrderBtn] = useState("");
-  const [scrollPosition, setScrollPosition] = useState(0);
+  // const [scrollPosition, setScrollPosition] = useState(0);
   const body = document.querySelector("body");
   const orderbtnClick = (e) => {
     if (!isLoggedIn) {
@@ -80,7 +80,7 @@ const ProductDetail = ({ authService }) => {
     }
     setIsOrderBtnClicked(true);
     setOrderBtn(e.target.dataset.orderbtn);
-    setScrollPosition(window.pageYOffset);
+    // setScrollPosition(window.pageYOffset);
   };
 
   // 수량 선택
@@ -99,20 +99,20 @@ const ProductDetail = ({ authService }) => {
     body.style.removeProperty("position");
     body.style.removeProperty("top");
     body.style.removeProperty("width");
-    window.scrollTo(0, scrollPosition);
+    // window.scrollTo(0, scrollPosition);
     setIsOrderBtnClicked(false);
     setCount(1);
   };
 
   // 팝업시 스크롤 방지
-  useEffect(() => {
-    if (scrollPosition !== 0) {
-      body.style.overflow = "hidden";
-      body.style.position = "fixed";
-      body.style.top = `-${scrollPosition}px`;
-      body.style.width = "100%";
-    }
-  }, [scrollPosition]);
+  // useEffect(() => {
+  //   if (scrollPosition !== 0) {
+  //     body.style.overflow = "hidden";
+  //     body.style.position = "fixed";
+  //     body.style.top = `-${scrollPosition}px`;
+  //     body.style.width = "100%";
+  //   }
+  // }, [scrollPosition]);
 
   // 구매, 렌탈 상담 버튼 클릭
   const colorRef = useRef();
