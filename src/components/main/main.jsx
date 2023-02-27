@@ -40,48 +40,57 @@ const Main = ({ authService }) => {
   };
 
   return (
-    <div className={styles.main}>
-      <HeaderMain authService={authService} />
-      <div className={styles.section}>
-        {!isLoggedIn && (
-          <div className={styles.logInContainer}>
-            <Link to="/login">
-              <div className={styles.logInBtn}>
-                <FontAwesomeIcon
-                  icon={faCircleUser}
-                  className={styles.userIcon}
-                />
-                <h2>
-                  <span>로그인</span>해 주세요
-                </h2>
-                <FontAwesomeIcon
-                  icon={faAngleRight}
-                  className={styles.nextIcon}
-                />
-              </div>
-            </Link>
-          </div>
-        )}
-        {isLoggedIn && (
-          <>
-            <div className={styles.userInfo}>
-              <span>
-                <span className={styles.userName}>
-                  {userInfo && userInfo.name}
-                </span>
-                님
-              </span>
-              <span className={styles.time}>
-                사용시간 <span className={styles.timeVal}>0</span>분
-              </span>
+    <>
+      <div className={styles.main}>
+        <HeaderMain authService={authService} />
+        <div className={styles.section}>
+          {!isLoggedIn && (
+            <div className={styles.logInContainer}>
+              <Link to="/login">
+                <div className={styles.logInBtn}>
+                  <FontAwesomeIcon
+                    icon={faCircleUser}
+                    className={styles.userIcon}
+                  />
+                  <h2>
+                    <span>로그인</span>해 주세요
+                  </h2>
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    className={styles.nextIcon}
+                  />
+                </div>
+              </Link>
             </div>
-          </>
-        )}
-        <Banner />
-        <Main_friendmall userInfo={userInfo} type="chair" />
-        <Main_friendmall userInfo={userInfo} type="waterPurifier" />
+          )}
+          {isLoggedIn && (
+            <>
+              <div className={styles.userInfo}>
+                <span>
+                  <span className={styles.userName}>
+                    {userInfo && userInfo.name}
+                  </span>
+                  님
+                </span>
+                <span className={styles.time}>
+                  사용시간 <span className={styles.timeVal}>0</span>분
+                </span>
+              </div>
+            </>
+          )}
+          <Banner />
+          <Main_friendmall userInfo={userInfo} type="chair" />
+          <Main_friendmall userInfo={userInfo} type="waterPurifier" />
+        </div>
       </div>
-    </div>
+      <div className={styles.notice}>
+        <div className={styles.alert}>
+          <p>브라우저 창을 모바일 화면 크기로 줄여주세요</p>
+          <img src="./images/qrcode.png" alt="qr코드" />
+          <span className={styles.caption}>스마트폰 접속 QR코드</span>
+        </div>
+      </div>
+    </>
   );
 };
 
