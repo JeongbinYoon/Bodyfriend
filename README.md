@@ -5,8 +5,7 @@
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/PostCSS-DD3A0A?style=flat&logo=PostCSS&logoColor=white"/> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=Firebase&logoColor=orange"/>
 
 ## 모바일 접속 QR코드
-https://jeongbinyoon.github.io/Bodyfriend
-<img src="https://user-images.githubusercontent.com/86540140/223289305-fa969406-22a9-4785-a45d-4e1170ed5506.png" width="250"><br/>
+<img src="https://user-images.githubusercontent.com/86540140/223289305-fa969406-22a9-4785-a45d-4e1170ed5506.png" width="200"><br/>
 
 # 구현 사항
 + 회원가입/로그인
